@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane minWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paliy.controller.tabs.MainTabController">
+   <children>
+      <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="256.0" AnchorPane.topAnchor="0.0">
+         <children>
+             <HBox prefHeight="652.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <children>
+                    <SplitPane id="mainSplitP" dividerPositions="0.5984615384615385" orientation="VERTICAL" prefHeight="652.0" prefWidth="752.0" HBox.hgrow="ALWAYS">
+                        <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="387.0" prefWidth="744.0">
+                               <children>
+                                   <VBox prefHeight="390.0" prefWidth="744.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <children>
+                                          <HBox prefHeight="48.0" prefWidth="751.0">
+                                             <children>
+                                                 <VBox prefHeight="90.0" prefWidth="127.0">
+                                                    <children>
+                                                        <Label alignment="CENTER" prefHeight="20.0" prefWidth="121.0" text="Всього Книг" textAlignment="CENTER">
+                                                            <font>
+                                                                <Font name="Verdana" size="16.0" />
+                                                            </font>
+                                                        </Label>
+                                                        <Label fx:id="lblMainAllBooks" alignment="CENTER" contentDisplay="CENTER" prefHeight="28.0" prefWidth="127.0" text="165" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                            <font>
+                                                                <Font name="Verdana" size="22.0" />
+                                                            </font>
+                                                        </Label>
+                                                    </children>
+                                                 </VBox>
+                                                 <Separator minHeight="25.0" orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="1">
+                                                     <GridPane.margin>
+                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                                                     </GridPane.margin>
+                                                 </Separator>
+                                                 <VBox prefHeight="90.0" prefWidth="127.0">
+                                                    <children>
+                                                        <Label alignment="CENTER" prefHeight="20.0" prefWidth="121.0" text="Унікальні" textAlignment="CENTER">
+                                                            <font>
+                                                                <Font name="Verdana" size="16.0" />
+                                                            </font>
+                                                        </Label>
+                                                        <Label fx:id="lblMainUniqueBooks" alignment="CENTER" contentDisplay="CENTER" prefHeight="28.0" prefWidth="127.0" text="89" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                            <font>
+                                                                <Font name="Verdana" size="22.0" />
+                                                            </font>
+                                                        </Label>
+                                                    </children>
+                                                 </VBox>
+                                                 <Separator minHeight="25.0" orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="3">
+                                                     <GridPane.margin>
+                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                                                     </GridPane.margin>
+                                                 </Separator>
+                                                 <VBox prefHeight="90.0" prefWidth="127.0">
+                                                    <children>
+                                                        <Label alignment="CENTER" prefHeight="20.0" prefWidth="121.0" text="Замовлено на" textAlignment="CENTER">
+                                                            <font>
+                                                                <Font name="Verdana" size="16.0" />
+                                                            </font>
+                                                        </Label>
+                                                        <Label fx:id="lblMainOrderedPrice" alignment="CENTER" contentDisplay="CENTER" prefHeight="28.0" prefWidth="127.0" text="16550" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                            <font>
+                                                                <Font name="Verdana" size="22.0" />
+                                                            </font>
+                                                        </Label>
+                                                    </children>
+                                                 </VBox>
+                                                 <Separator minHeight="25.0" orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="5">
+                                                     <GridPane.margin>
+                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                                                     </GridPane.margin>
+                                                 </Separator>
+                                                 <VBox prefHeight="90.0" prefWidth="127.0">
+                                                    <children>
+                                                        <Label alignment="CENTER" prefHeight="20.0" prefWidth="121.0" text="Зі знижкою" textAlignment="CENTER">
+                                                            <font>
+                                                                <Font name="Verdana" size="16.0" />
+                                                            </font>
+                                                        </Label>
+                                                        <Label fx:id="lblMainOrderedWithDiscPrice" alignment="CENTER" contentDisplay="CENTER" prefHeight="28.0" prefWidth="127.0" text="10120" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                            <font>
+                                                                <Font name="Verdana" size="22.0" />
+                                                            </font>
+                                                        </Label>
+                                                    </children>
+                                                 </VBox>
+                                                 <Separator minHeight="25.0" orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="7">
+                                                     <GridPane.margin>
+                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                                                     </GridPane.margin>
+                                                 </Separator>
+                                                 <VBox prefHeight="90.0" prefWidth="127.0">
+                                                    <children>
+                                                        <Label alignment="CENTER" prefHeight="20.0" prefWidth="121.0" text="Продано на" textAlignment="CENTER">
+                                                            <font>
+                                                                <Font name="Verdana" size="16.0" />
+                                                            </font>
+                                                        </Label>
+                                                        <Label fx:id="lblMainSoldPrice" alignment="CENTER" contentDisplay="CENTER" prefHeight="28.0" prefWidth="127.0" text="10980" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                            <font>
+                                                                <Font name="Verdana" size="22.0" />
+                                                            </font>
+                                                        </Label>
+                                                    </children>
+                                                 </VBox>
+                                             </children>
+                                              <padding>
+                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                              </padding>
+                                              <VBox.margin>
+                                                  <Insets bottom="5.0" right="5.0" />
+                                              </VBox.margin>
+                                          </HBox>
+                                          <HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="750.0">
+                                             <children>
+                                                 <TextField fx:id="txtFieadMainBookSearch" onKeyPressed="#onSearchByEnter" prefHeight="25.0" prefWidth="389.0">
+                                                     <HBox.margin>
+                                                         <Insets left="10.0" right="10.0" />
+                                                     </HBox.margin>
+                                                 </TextField>
+                                                 <Button fx:id="btnMainSearch" mnemonicParsing="false" onAction="#onBookSearch" prefHeight="25.0" prefWidth="99.0" text="Знайти">
+                                                     <HBox.margin>
+                                                         <Insets left="10.0" right="15.0" />
+                                                     </HBox.margin>
+                                                 </Button>
+                                          <AnchorPane prefHeight="30.0" prefWidth="127.0">
+                                             <children>
+                                                <ImageView fx:id="imageBtnMainRefresh" fitHeight="24.0" fitWidth="24.0" layoutX="128.0" onMouseClicked="#onRefresh" pickOnBounds="true" preserveRatio="true" />
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </AnchorPane>
+                                             </children>
+                                          </HBox>
+                                          <AnchorPane prefHeight="254.0" prefWidth="750.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                 <TableView fx:id="tableMainBook" editable="true" fixedCellSize="22.0" prefHeight="200.0" prefWidth="750.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                     <columns>
+                                                         <TableColumn fx:id="bookIdClmn" maxWidth="100.0" minWidth="15.0" prefWidth="35.0" text="№" />
+                                                         <TableColumn fx:id="bookNameClmn" maxWidth="300.0" minWidth="15.0" prefWidth="120.0" text="Назва книги" />
+                                                <TableColumn fx:id="bookAgeClmn" maxWidth="300.0" minWidth="15.0" prefWidth="60.0" text="Вік" />
+                                                         <TableColumn fx:id="bookAddedDateClmn" maxWidth="300.0" minWidth="15.0" prefWidth="100.0" text="Дата натходження" />
+                                                         <TableColumn fx:id="bookRestClmn" maxWidth="300.0" prefWidth="60.0" text="Залишок" />
+                                                         <TableColumn fx:id="bookPriceClmn" maxWidth="300.0" minWidth="15.0" prefWidth="70.0" text="Ціна видавн." />
+                                                         <TableColumn fx:id="bookSalePriceClmn" maxWidth="300.0" minWidth="15.0" prefWidth="120.0" text="Ціна продажу" />
+                                                         <TableColumn fx:id="bookDescripClmn" maxWidth="300.0" minWidth="15.0" prefWidth="88.0" text="Опис" />
+                                                         <TableColumn fx:id="bookTagClmn" maxWidth="300.0" minWidth="15.0" prefWidth="100.0" text="Теги" />
+                                                         <TableColumn fx:id="bookWeightClmn" maxWidth="300.0" minWidth="15.0" prefWidth="60.0" text="Вага" />
+                                                     </columns>
+                                                 </TableView>
+                                             </children>
+                                              <VBox.margin>
+                                                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                                              </VBox.margin>
+                                          </AnchorPane>
+                                          <AnchorPane VBox.vgrow="NEVER">
+                                             <children>
+                                                 <Button fx:id="btnMainBookAdd" layoutX="10.0" layoutY="5.0" mnemonicParsing="false" onAction="#onBookAdd" text="Додати книгу">
+                                                     <HBox.margin>
+                                                         <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                                                     </HBox.margin>
+                                                 </Button>
+                                                 <Button fx:id="btnBookArchive" layoutX="290.0" layoutY="5.0" mnemonicParsing="false" onAction="#onBookArchive" text="В архів">
+                                                     <HBox.margin>
+                                                         <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                                                     </HBox.margin>
+                                                 </Button>
+                                                 <Button fx:id="btnMainBookRemove" layoutX="207.0" layoutY="5.0" mnemonicParsing="false" onAction="#onBookRemove" text="Видалити">
+                                                     <HBox.margin>
+                                                         <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                                                     </HBox.margin>
+                                                 </Button>
+                                                 <Button fx:id="btnBookEdit" layoutX="115.0" layoutY="5.0" mnemonicParsing="false" onAction="#onBookEdit" text="Редагувати">
+                                                     <HBox.margin>
+                                                         <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                                                     </HBox.margin>
+                                                 </Button>
+                                                 <Button fx:id="btnMainAddToOrder" defaultButton="true" layoutX="569.0" layoutY="3.0" mnemonicParsing="false" onAction="#onBookAddToOrder" text="Додати до замовлення" AnchorPane.rightAnchor="10.0">
+                                                     <font>
+                                                         <Font size="14.0" />
+                                                     </font>
+                                                     <HBox.margin>
+                                                         <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                                                     </HBox.margin>
+                                                 </Button>
+                                             </children>
+                                          </AnchorPane>
+                                      </children>
+                                   </VBox>
+                               </children>
+                            </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="297.0" prefWidth="749.0">
+                               <children>
+                                   <VBox prefHeight="256.0" prefWidth="744.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <children>
+                                          <AnchorPane maxHeight="79.0" prefHeight="67.0" prefWidth="993.0">
+                                             <children>
+                                                  <Label layoutX="5.0" layoutY="7.0" prefHeight="20.0" prefWidth="87.0" text="Замовлення">
+                                                      <font>
+                                                          <Font size="14.0" />
+                                                      </font>
+                                                      <HBox.margin>
+                                                          <Insets bottom="5.0" left="5.0" top="7.0" />
+                                                      </HBox.margin>
+                                                  </Label>
+                                                  <TextField fx:id="txtFieadMainClientTel" layoutX="417.0" layoutY="5.0">
+                                                      <HBox.margin>
+                                                          <Insets bottom="5.0" right="5.0" top="5.0" />
+                                                      </HBox.margin>
+                                                  </TextField>
+                                                   <Label fx:id="lblMainOrderDate" layoutX="580.0" layoutY="8.0" prefHeight="20.0" prefWidth="149.0" text="28.12.2017">
+                                                       <font>
+                                                           <Font size="14.0" />
+                                                       </font>
+                                                       <HBox.margin>
+                                                           <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                                                       </HBox.margin>
+                                                   </Label>
+                                                  <Label fx:id="lblMainOrderNumber" layoutX="92.0" layoutY="5.0" prefHeight="25.0" prefWidth="60.0" text="№103">
+                                                      <font>
+                                                          <Font size="16.0" />
+                                                      </font>
+                                                      <HBox.margin>
+                                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                      </HBox.margin>
+                                                  </Label>
+                                                  <Label layoutX="384.0" layoutY="7.0" prefHeight="20.0" prefWidth="33.0" text="Тел:">
+                                                      <font>
+                                                          <Font size="14.0" />
+                                                      </font>
+                                                      <HBox.margin>
+                                                          <Insets bottom="5.0" left="5.0" top="7.0" />
+                                                      </HBox.margin>
+                                                  </Label>
+                                                  <Label layoutX="147.0" layoutY="7.0" prefHeight="20.0" prefWidth="38.0" text="ФІО:">
+                                                      <font>
+                                                          <Font size="14.0" />
+                                                      </font>
+                                                      <HBox.margin>
+                                                          <Insets bottom="5.0" left="5.0" top="7.0" />
+                                                      </HBox.margin>
+                                                  </Label>
+                                                  <TextField fx:id="txtFieadMainClientFIO" layoutX="184.0" layoutY="5.0" onAction="#onFioEnter" prefHeight="25.0" prefWidth="229.0" AnchorPane.leftAnchor="146.0">
+                                                      <HBox.margin>
+                                                          <Insets bottom="5.0" right="5.0" top="5.0" />
+                                                      </HBox.margin>
+                                                  </TextField>
+                                          <TextField fx:id="txtFieadMainClientAddress" layoutX="146.0" layoutY="34.0" prefHeight="25.0" prefWidth="503.0" AnchorPane.leftAnchor="146.0" />
+                                          <Label layoutX="6.0" layoutY="37.0" text="Адреса отримувача:" AnchorPane.leftAnchor="6.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="108.0" prefWidth="744.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                 <TableView fx:id="tableMainOrder" prefHeight="180.0" prefWidth="744.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                     <columns>
+                                                         <TableColumn fx:id="orderIdClmn" prefWidth="75.0" text="№" />
+                                                         <TableColumn fx:id="orderBookNameClmn" prefWidth="249.0" text="Назва" />
+                                                         <TableColumn fx:id="orderBookWeightClmn" prefWidth="71.0" text="Вага (г)" />
+                                                         <TableColumn fx:id="orderBookQuantityClmn" prefWidth="134.0" text="Кількість (шт)" />
+                                                         <TableColumn fx:id="orderBookPriceClmn" minWidth="2.0" prefWidth="106.0" text="Ціна (грн)" />
+                                                         <TableColumn fx:id="orderCleanItem" minWidth="0.0" prefWidth="90.0" text="Очистити" />
+                                                     </columns>
+                                                 </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="48.0" prefWidth="993.0">
+                                             <children>
+                                                  <Label layoutY="15.0" text="Замовлено через:">
+                                                      <font>
+                                                          <Font size="14.0" />
+                                                      </font>
+                                                      <HBox.margin>
+                                                          <Insets bottom="5.0" right="5.0" top="8.0" />
+                                                      </HBox.margin>
+                                                  </Label>
+                                                  <ChoiceBox fx:id="dropDMainOrderedFrom" layoutX="121.0" layoutY="12.0" prefHeight="25.0" prefWidth="82.0">
+                                                      <HBox.margin>
+                                                          <Insets bottom="5.0" right="10.0" top="5.0" />
+                                                      </HBox.margin>
+                                                  </ChoiceBox>
+                                                  <Label fx:id="lbaMainParcelPrice" layoutX="558.0" layoutY="12.0" text="500грн">
+                                                      <font>
+                                                          <Font size="18.0" />
+                                                      </font>
+                                                      <HBox.margin>
+                                                          <Insets bottom="5.0" right="5.0" top="5.0" />
+                                                      </HBox.margin>
+                                                  </Label>
+                                                  <Label layoutX="438.0" layoutY="15.0" text="Загальна вартість:">
+                                                      <font>
+                                                          <Font size="14.0" />
+                                                      </font>
+                                                      <HBox.margin>
+                                                          <Insets bottom="5.0" right="5.0" top="8.0" />
+                                                      </HBox.margin>
+                                                  </Label>
+                                                  <Label layoutX="346.0" layoutY="15.0" text="Вага:">
+                                                      <font>
+                                                          <Font size="14.0" />
+                                                      </font>
+                                                      <HBox.margin>
+                                                          <Insets bottom="5.0" right="5.0" top="8.0" />
+                                                      </HBox.margin>
+                                                  </Label>
+                                                  <ChoiceBox fx:id="dropDMainSendVia" layoutX="280.0" layoutY="12.0" prefHeight="25.0" prefWidth="56.0">
+                                                      <HBox.margin>
+                                                          <Insets bottom="5.0" right="10.0" top="5.0" />
+                                                      </HBox.margin>
+                                                  </ChoiceBox>
+                                                   <Button fx:id="btnMainCreateOrder" defaultButton="true" layoutX="633.0" layoutY="13.0" maxHeight="28.0" minHeight="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="110.0" text="Готово" AnchorPane.bottomAnchor="8.0" AnchorPane.topAnchor="13.0">
+                                                       <font>
+                                                           <Font size="16.0" />
+                                                       </font>
+                                                       <padding>
+                                                           <Insets bottom="2.0" />
+                                                       </padding>
+                                                       <HBox.margin>
+                                                           <Insets top="8.0" />
+                                                       </HBox.margin>
+                                                   </Button>
+                                                  <Label fx:id="lbaMainParcelWeight" layoutX="382.0" layoutY="12.0" text="1530г">
+                                                      <font>
+                                                          <Font size="18.0" />
+                                                      </font>
+                                                      <HBox.margin>
+                                                          <Insets bottom="5.0" right="10.0" top="5.0" />
+                                                      </HBox.margin>
+                                                  </Label>
+                                                  <Label layoutX="213.0" layoutY="15.0" text="Доставка:">
+                                                      <font>
+                                                          <Font size="14.0" />
+                                                      </font>
+                                                      <HBox.margin>
+                                                          <Insets bottom="5.0" right="5.0" top="8.0" />
+                                                      </HBox.margin>
+                                                  </Label>
+                                             </children>
+                                          </AnchorPane>
+                                      </children>
+                                   </VBox>
+                               </children>
+                            </AnchorPane>
+                        </items>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                    </SplitPane>
+                </children>
+             </HBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+         </padding>
+      </AnchorPane>
+      <AnchorPane layoutX="1010.0" prefHeight="985.0" prefWidth="259.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="lblMainBookName" layoutX="10.0" layoutY="30.0" prefHeight="27.0" prefWidth="241.0" text="Віммельдім" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="30.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnMainBookRemove2" layoutX="144.0" layoutY="631.0" mnemonicParsing="false" onAction="#onBookRemove" text="Видалити" AnchorPane.bottomAnchor="10.0" />
+            <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="-2.0" prefHeight="17.0" prefWidth="241.0" text="Детальний опис" textAlignment="CENTER">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <Button fx:id="btnMainEditBookDescrip" layoutX="31.0" layoutY="631.0" mnemonicParsing="false" onAction="#onBookEditDescrip" text="Редагувати" AnchorPane.bottomAnchor="10.0" />
+            <Separator layoutX="25.0" layoutY="235.0" prefWidth="200.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="20.0" top="15.0" />
+               </VBox.margin>
+            </Separator>
+            <Separator layoutX="-3.0" layoutY="15.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.topAnchor="15.0" />
+            <Label fx:id="lblDropImgTabMainBook" layoutX="55.0" layoutY="134.0" opacity="0.81" prefHeight="17.0" prefWidth="153.0" text="Перетягніть сюди картинку" textAlignment="CENTER" />
+            <ImageView fx:id="imgMainBookImage" fitHeight="160.0" fitWidth="220.0" layoutX="20.0" layoutY="62.0" onDragDropped="#imageDropped" onDragOver="#imageDragOver" pickOnBounds="true" preserveRatio="true" />
+            <TextArea fx:id="txtAreaMainBookDescrip" layoutX="21.0" layoutY="249.0" prefHeight="375.0" prefWidth="220.0" text="This is a large text for test ! &#10;&#10;This is a large text for test ! &#10;This is a large text for test ! &#10;&#10;This is a large text for test ! &#10;This is a large text for test ! &#10;&#10;&#10;&#10;This is a large text for test ! &#10;&#10;This is a large text for test ! &#10;This is a large text for test ! &#10;&#10;This is a large text for test ! &#10;This is a large text for test ! &#10;&#10;This is a large text for test ! This is a large text for test ! &#10;&#10;This is a large text for test ! &#10;This is a large text for test ! &#10;&#10;This is a large text for test ! &#10;This is a large text for test ! &#10;&#10;This is a large text for test ! This is a large text for test ! &#10;&#10;This is a large text for test ! &#10;This is a large text for test ! &#10;&#10;This is a large text for test ! &#10;This is a large text for test ! &#10;&#10;This is a large text for test ! This is a large text for test ! " wrapText="true" AnchorPane.bottomAnchor="40.0" AnchorPane.topAnchor="250.0" />
+            <ImageView fx:id="imgMainBookRemoveImg" fitHeight="16.0" fitWidth="16.0" layoutX="200.0" layoutY="62.0" onMouseClicked="#onMouseClickedDeleteImg" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

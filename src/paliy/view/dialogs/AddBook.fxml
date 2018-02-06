@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="424.0" prefWidth="497.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paliy.controller.dialogs.AddBookController">
+   <children>
+      <Label layoutX="11.0" layoutY="64.0" text="На вік дитини:">
+         <VBox.margin>
+            <Insets bottom="10.0" top="5.0" />
+         </VBox.margin>
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="234.0" text="Опис:">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="11.0" layoutY="153.0" text="Ціна продажу (чис):">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="11.0" layoutY="34.0" text="Назва:">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="11.0" layoutY="124.0" text="Ціна закупки (чис):">
+         <VBox.margin>
+            <Insets bottom="10.0" top="5.0" />
+         </VBox.margin>
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="11.0" layoutY="94.0" text="К-ть книг (число):">
+         <VBox.margin>
+            <Insets bottom="10.0" top="5.0" />
+         </VBox.margin>
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="11.0" layoutY="184.0" text="Теги:">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="11.0" layoutY="214.0" text="Вага:">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfieldDialogAddBname" layoutX="143.0" layoutY="30.0" prefHeight="25.0" prefWidth="328.0" AnchorPane.leftAnchor="143.0" AnchorPane.rightAnchor="26.0">
+         <VBox.margin>
+            <Insets bottom="5.0" top="5.0" />
+         </VBox.margin>
+      </TextField>
+      <TextField fx:id="tfieldDialogAddBage" layoutX="143.0" layoutY="60.0" prefHeight="25.0" prefWidth="328.0" AnchorPane.leftAnchor="143.0" AnchorPane.rightAnchor="26.0">
+         <VBox.margin>
+            <Insets bottom="5.0" />
+         </VBox.margin>
+      </TextField>
+      <TextField fx:id="tfieldDialogAddBquantity" layoutX="143.0" layoutY="90.0" prefHeight="25.0" prefWidth="328.0" AnchorPane.leftAnchor="143.0" AnchorPane.rightAnchor="26.0">
+         <VBox.margin>
+            <Insets bottom="5.0" />
+         </VBox.margin>
+      </TextField>
+      <TextField fx:id="tfieldDialogAddBorderPrice" layoutX="143.0" layoutY="120.0" prefHeight="25.0" prefWidth="328.0" AnchorPane.leftAnchor="143.0" AnchorPane.rightAnchor="26.0">
+         <VBox.margin>
+            <Insets bottom="5.0" />
+         </VBox.margin>
+      </TextField>
+      <TextField fx:id="tfieldDialogAddBsellPrice" layoutX="143.0" layoutY="150.0" prefHeight="25.0" prefWidth="328.0" AnchorPane.leftAnchor="143.0" AnchorPane.rightAnchor="26.0">
+         <VBox.margin>
+            <Insets bottom="5.0" />
+         </VBox.margin>
+      </TextField>
+      <TextField fx:id="tfieldDialogAddBtags" layoutX="143.0" layoutY="179.0" prefHeight="25.0" prefWidth="328.0" AnchorPane.leftAnchor="143.0" AnchorPane.rightAnchor="26.0">
+         <VBox.margin>
+            <Insets bottom="5.0" />
+         </VBox.margin>
+      </TextField>
+      <TextField fx:id="tfieldDialogAddBweight" layoutX="143.0" layoutY="210.0" prefHeight="25.0" prefWidth="328.0" AnchorPane.leftAnchor="143.0" AnchorPane.rightAnchor="26.0">
+         <VBox.margin>
+            <Insets bottom="5.0" />
+         </VBox.margin>
+      </TextField>
+      <TextArea fx:id="tareaDialogAddBdescrip" layoutX="143.0" layoutY="240.0" prefHeight="140.0" prefWidth="328.0" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="143.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="240.0" />
+      <Label layoutX="143.0" layoutY="6.0" text="Книга №" AnchorPane.topAnchor="6.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblDialogAddBnum" layoutX="211.0" layoutY="6.0" prefHeight="17.0" prefWidth="49.0" text="1" AnchorPane.leftAnchor="211.0" AnchorPane.rightAnchor="237.0" AnchorPane.topAnchor="6.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="332.0" layoutY="6.0" text="Додано " AnchorPane.rightAnchor="106.0" AnchorPane.topAnchor="6.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblDialogAddBdate" layoutX="406.0" layoutY="6.0" text="16.01.18" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="6.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnDialogAddBadd" layoutX="419.0" layoutY="385.0" mnemonicParsing="false" onAction="#onAddBook" text="Додати" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="25.0" />
+      <Button fx:id="btnDialogAddBCancel" layoutX="316.0" layoutY="385.0" mnemonicParsing="false" onAction="#onCancel" text="Відмінити" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="111.0" />
+      <Label layoutX="20.0" layoutY="299.0" lineSpacing="2.0" prefHeight="44.0" prefWidth="106.0" text="Перетягніть сюди картинку" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imgAddBookDia" fitHeight="118.0" fitWidth="128.0" layoutX="9.0" layoutY="262.0" onDragDropped="#imageDropped" onDragOver="#imageDragOver" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>

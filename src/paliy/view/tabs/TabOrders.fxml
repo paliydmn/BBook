@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paliy.controller.tabs.OrdersController">
+    <children>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="744.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="256.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <VBox prefHeight="390.0" prefWidth="744.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <HBox prefHeight="25.0" prefWidth="750.0">
+                            <children>
+                                <TextField prefHeight="25.0" prefWidth="389.0">
+                                    <HBox.margin>
+                                        <Insets left="10.0" right="10.0" />
+                                    </HBox.margin>
+                                </TextField>
+                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Знайти">
+                                    <HBox.margin>
+                                        <Insets left="10.0" right="10.0" />
+                                    </HBox.margin>
+                                </Button>
+                            </children>
+                        </HBox>
+                        <AnchorPane prefHeight="254.0" prefWidth="750.0" VBox.vgrow="ALWAYS">
+                            <children>
+                                <TableView prefHeight="200.0" prefWidth="750.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <columns>
+                                        <TableColumn prefWidth="28.0" text="№" />
+                                        <TableColumn prefWidth="145.0" text="Назва книги" />
+                                        <TableColumn prefWidth="89.0" text="Теги" />
+                                        <TableColumn prefWidth="67.0" text="Отримано" />
+                                        <TableColumn prefWidth="64.0" text="Залишок" />
+                                        <TableColumn prefWidth="86.0" text="Ціна видавн." />
+                                        <TableColumn prefWidth="78.0" text="Ціна продажу" />
+                                        <TableColumn prefWidth="186.0" text="Опис" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                            </VBox.margin>
+                        </AnchorPane>
+                        <AnchorPane VBox.vgrow="NEVER">
+                            <children>
+                                <Button layoutX="10.0" layoutY="5.0" mnemonicParsing="false" text="Створити">
+                                    <HBox.margin>
+                                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                                    </HBox.margin>
+                                </Button>
+                                <Button layoutX="290.0" layoutY="5.0" mnemonicParsing="false" text="В архів">
+                                    <HBox.margin>
+                                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                                    </HBox.margin>
+                                </Button>
+                                <Button layoutX="207.0" layoutY="5.0" mnemonicParsing="false" text="Видалити">
+                                    <HBox.margin>
+                                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                                    </HBox.margin>
+                                </Button>
+                                <Button layoutX="115.0" layoutY="5.0" mnemonicParsing="false" text="Редагувати">
+                                    <HBox.margin>
+                                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                                    </HBox.margin>
+                                </Button>
+                            </children>
+                            <VBox.margin>
+                                <Insets bottom="10.0" left="5.0" right="5.0" />
+                            </VBox.margin>
+                        </AnchorPane>
+                    </children>
+                </VBox>
+            </children>
+            <HBox.margin>
+                <Insets />
+            </HBox.margin>
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+            </padding>
+        </AnchorPane>
+        <AnchorPane layoutX="743.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="19.0" layoutY="388.0" prefHeight="25.0" prefWidth="207.0" text="21015005854893" textAlignment="CENTER" AnchorPane.leftAnchor="19.0">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                    <VBox.margin>
+                        <Insets left="10.0" />
+                    </VBox.margin>
+                </Label>
+                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="19.0" layoutY="282.0" prefHeight="25.0" prefWidth="216.0" text="Палій Д.М." textAlignment="CENTER" AnchorPane.leftAnchor="19.0">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                    <VBox.margin>
+                        <Insets left="10.0" />
+                    </VBox.margin>
+                </Label>
+                <Separator layoutX="25.0" layoutY="254.0" prefWidth="200.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+                    <VBox.margin>
+                        <Insets left="10.0" right="20.0" />
+                    </VBox.margin>
+                </Separator>
+                <Label layoutX="10.0" layoutY="30.0" prefHeight="27.0" prefWidth="129.0" text="Замовлення №" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="30.0">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="257.0" prefHeight="25.0" prefWidth="216.0" text="ФІО" textAlignment="CENTER" AnchorPane.leftAnchor="10.0">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </Label>
+                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="19.0" layoutY="335.0" prefHeight="25.0" prefWidth="207.0" text="0936791011" textAlignment="CENTER" AnchorPane.leftAnchor="19.0">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                    <VBox.margin>
+                        <Insets left="10.0" />
+                    </VBox.margin>
+                </Label>
+                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="204.0" prefHeight="25.0" prefWidth="216.0" text="Замовленно через" textAlignment="CENTER" AnchorPane.leftAnchor="10.0">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </Label>
+                <Separator layoutX="25.0" layoutY="307.0" prefWidth="200.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+                    <VBox.margin>
+                        <Insets left="10.0" right="20.0" />
+                    </VBox.margin>
+                </Separator>
+                <Separator layoutX="25.0" layoutY="413.0" prefWidth="200.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+                    <VBox.margin>
+                        <Insets left="10.0" right="20.0" />
+                    </VBox.margin>
+                </Separator>
+                <Label layoutX="139.0" layoutY="30.0" prefHeight="27.0" prefWidth="111.0" text="3">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Button layoutX="144.0" layoutY="631.0" mnemonicParsing="false" text="Видалити" AnchorPane.bottomAnchor="10.0" />
+                <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="-2.0" prefHeight="17.0" prefWidth="241.0" text="Детальний опис" textAlignment="CENTER">
+                    <VBox.margin>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <padding>
+                        <Insets top="10.0" />
+                    </padding>
+                </Label>
+                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="19.0" layoutY="229.0" prefHeight="25.0" prefWidth="207.0" text="Instagram" textAlignment="CENTER" AnchorPane.leftAnchor="19.0">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                    <VBox.margin>
+                        <Insets left="10.0" />
+                    </VBox.margin>
+                </Label>
+                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="310.0" prefHeight="25.0" prefWidth="216.0" text="Тел" textAlignment="CENTER" AnchorPane.leftAnchor="10.0">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </Label>
+                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="363.0" prefHeight="25.0" prefWidth="216.0" text="Накладна" textAlignment="CENTER" AnchorPane.leftAnchor="10.0">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </Label>
+                <Separator layoutX="25.0" layoutY="360.0" prefWidth="200.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+                    <VBox.margin>
+                        <Insets left="10.0" right="20.0" />
+                    </VBox.margin>
+                </Separator>
+                <Button layoutX="31.0" layoutY="631.0" mnemonicParsing="false" text="Редагувати" AnchorPane.bottomAnchor="10.0" />
+                <Separator layoutX="25.0" layoutY="191.0" prefWidth="200.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="20.0" top="15.0" />
+                    </VBox.margin>
+                </Separator>
+                <ListView layoutX="18.0" layoutY="82.0" prefHeight="94.0" prefWidth="229.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="10.0">
+                    <VBox.margin>
+                        <Insets left="5.0" right="10.0" />
+                    </VBox.margin>
+                </ListView>
+                <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="57.0" prefHeight="25.0" prefWidth="224.0" text="Книги" textAlignment="CENTER" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" VBox.vgrow="ALWAYS">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets left="5.0" />
+                    </VBox.margin>
+                </Label>
+                <Separator layoutX="-3.0" layoutY="15.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.topAnchor="15.0" />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

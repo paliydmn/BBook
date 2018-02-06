@@ -1,0 +1,6 @@
+/*#mainSplitP {
+    -fx-box-border: transparent;
+}*/
+.split-pane {
+    -fx-box-border: transparent;
+}
