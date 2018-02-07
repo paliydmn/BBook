@@ -2,16 +2,17 @@ package paliy.controller.dialogs;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.stage.Stage;
+import org.controlsfx.validation.Severity;
+import org.controlsfx.validation.ValidationResult;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 import paliy.model.BookDAO;
 
 import java.io.File;
@@ -44,6 +45,7 @@ public class AddBookController {
 
     public static int bookId;
     public ImageView imgAddBookDia;
+    public Label lblWarning;
 
     private File imgFile = null;
 
@@ -51,6 +53,7 @@ public class AddBookController {
         this.bookId = bookId;
     }*/
 
+    ValidationSupport support = new ValidationSupport();
 
     @FXML
     public void initialize() {
@@ -58,8 +61,35 @@ public class AddBookController {
         String date = sdf.format(Calendar.getInstance().getTime());
         lblDialogAddBdate.setText(date);
         // ToDo . get correct next Book_ID from table. Temp solution here
-        lblDialogAddBnum.setText(String.valueOf(bookId + 1));
+         Validator<String> validator = new Validator<String>()
+        {
+            @Override
+            public ValidationResult apply(Control control, String value )
+            {
+                boolean condition = value != null ? !value.matches("\\d+" ) : value == null;
 
+                System.out.println( condition );
+
+                return ValidationResult.fromMessageIf( control, "not a number", Severity.ERROR, condition );
+            }
+        };
+        lblDialogAddBnum.setText(String.valueOf(bookId + 1));
+        support.registerValidator( tfieldDialogAddBorderPrice, true, validator );
+        support.registerValidator( tfieldDialogAddBquantity, true, validator );
+        support.registerValidator( tfieldDialogAddBsellPrice, true, validator );
+        support.registerValidator( tfieldDialogAddBweight, true, validator );
+
+        support.invalidProperty().addListener((obs, wasInvalid, isNowInvalid) -> {
+            if (isNowInvalid) {
+                System.out.println("Invalid");
+                btnDialogAddBadd.setDisable(true);
+                lblWarning.setVisible(true);
+            } else {
+                btnDialogAddBadd.setDisable(false);
+                lblWarning.setVisible(false);
+                System.out.println("All Valid");
+            }
+        });
     }
 
     public boolean addNewBook() throws SQLException, ClassNotFoundException {
@@ -80,11 +110,13 @@ public class AddBookController {
         sale_price = tfieldDialogAddBsellPrice.getText();
         rest = tfieldDialogAddBquantity.getText();
         tags = tfieldDialogAddBtags.getText();
-        if(imgFile != null)
-            return BookDAO.insertBook(name, age, descrip, weight, price, sale_price, rest, tags, imgFile);
-        else
-            return BookDAO.insertBook(name, age, descrip, weight, price, sale_price, rest, tags);
 
+            if(imgFile != null) {
+                return BookDAO.insertBook(name, age, descrip, weight, price, sale_price, rest, tags, imgFile);
+            }
+            else {
+                return BookDAO.insertBook(name, age, descrip, weight, price, sale_price, rest, tags);
+            }
     }
 
     public void onAddBook(ActionEvent actionEvent) {

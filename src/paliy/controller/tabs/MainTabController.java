@@ -215,7 +215,7 @@ public class MainTabController {
             TableRow<Book> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (!row.isEmpty() && event.getButton()== MouseButton.PRIMARY
-                        && event.getClickCount() == 2) {
+                        && event.getClickCount() == 1) {
                     updatePreview(row.getItem());
                     System.out.println("Book found in table and added to PreView side!");
                 }
@@ -597,12 +597,10 @@ public class MainTabController {
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
     public void onBookAddToOrder(ActionEvent actionEvent) {
-
     }
 
     public void onBookEdit(ActionEvent actionEvent) {
@@ -710,7 +708,6 @@ public class MainTabController {
     }
 
     public void onFioEnter(ActionEvent actionEvent) {
-
     }
 
     public void onMouseClickedDeleteImg(MouseEvent mouseEvent) {

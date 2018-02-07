@@ -139,5 +139,10 @@
          </font>
       </Label>
       <ImageView fx:id="imgAddBookDia" fitHeight="118.0" fitWidth="128.0" layoutX="9.0" layoutY="262.0" onDragDropped="#imageDropped" onDragOver="#imageDragOver" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="lblWarning" layoutX="19.0" layoutY="389.0" prefHeight="17.0" prefWidth="224.0" text="Перевірте, чи корректно введені дані" textFill="#dd0d0d" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
