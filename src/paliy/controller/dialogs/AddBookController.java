@@ -1,8 +1,10 @@
 package paliy.controller.dialogs;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
@@ -53,81 +55,77 @@ public class AddBookController {
         this.bookId = bookId;
     }*/
 
-    ValidationSupport support = new ValidationSupport();
+    private final ValidationSupport validationSupport = new ValidationSupport();
 
     @FXML
     public void initialize() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         String date = sdf.format(Calendar.getInstance().getTime());
         lblDialogAddBdate.setText(date);
-        // ToDo . get correct next Book_ID from table. Temp solution here
-         Validator<String> validator = new Validator<String>()
-        {
-            @Override
-            public ValidationResult apply(Control control, String value )
-            {
-                boolean condition = value != null ? !value.matches("\\d+" ) : value == null;
 
-                System.out.println( condition );
+         Validator<String> numberValidator = (control, value) -> {
+             boolean condition = value != null ? !value.matches("\\d+" ) : value == null;
+             return ValidationResult.fromMessageIf( control, "not a number", Severity.ERROR, condition );
+         };
+         Validator<String> notEmptyValidator = (control, value) -> {
+             boolean condition = value != null ? !value.matches("^(?=\\s*\\S).*$" ) : value == null;
+             return ValidationResult.fromMessageIf( control, "not a number", Severity.ERROR, condition );
+         };
 
-                return ValidationResult.fromMessageIf( control, "not a number", Severity.ERROR, condition );
-            }
-        };
         lblDialogAddBnum.setText(String.valueOf(bookId + 1));
-        support.registerValidator( tfieldDialogAddBorderPrice, true, validator );
-        support.registerValidator( tfieldDialogAddBquantity, true, validator );
-        support.registerValidator( tfieldDialogAddBsellPrice, true, validator );
-        support.registerValidator( tfieldDialogAddBweight, true, validator );
 
-        support.invalidProperty().addListener((obs, wasInvalid, isNowInvalid) -> {
+        validationSupport.registerValidator(tfieldDialogAddBname, true, notEmptyValidator);
+        validationSupport.registerValidator(tfieldDialogAddBage, true, notEmptyValidator);
+        validationSupport.registerValidator(tareaDialogAddBdescrip, true, notEmptyValidator);
+        validationSupport.registerValidator(tfieldDialogAddBage, true, notEmptyValidator);
+        validationSupport.registerValidator(tfieldDialogAddBtags, true, notEmptyValidator);
+
+        validationSupport.registerValidator( tfieldDialogAddBorderPrice, true, numberValidator );
+        validationSupport.registerValidator( tfieldDialogAddBquantity, true, numberValidator );
+        validationSupport.registerValidator( tfieldDialogAddBsellPrice, true, numberValidator );
+        validationSupport.registerValidator( tfieldDialogAddBweight, true, numberValidator );
+
+        validationSupport.invalidProperty().addListener((obs, wasInvalid, isNowInvalid) -> {
             if (isNowInvalid) {
-                System.out.println("Invalid");
                 btnDialogAddBadd.setDisable(true);
                 lblWarning.setVisible(true);
             } else {
                 btnDialogAddBadd.setDisable(false);
                 lblWarning.setVisible(false);
-                System.out.println("All Valid");
             }
         });
     }
 
-    public boolean addNewBook() throws SQLException, ClassNotFoundException {
-        String name = null;
-        String age = null;
-        String descrip = null;
-        String weight = null;
-        String price = null;
-        String sale_price = null;
-        String rest = null;
-        String tags = null;
+    private boolean addNewBook() throws SQLException, ClassNotFoundException {
+        String name = tfieldDialogAddBname.getText();
+        String age = tfieldDialogAddBage.getText();
+        String descrip = tareaDialogAddBdescrip.getText();
+        String weight = tfieldDialogAddBweight.getText();
+        String price = tfieldDialogAddBorderPrice.getText();
+        String sale_price = tfieldDialogAddBsellPrice.getText();
+        String rest = tfieldDialogAddBquantity.getText();
+        String tags = tfieldDialogAddBtags.getText();
 
-        name = tfieldDialogAddBname.getText();
-        age = tfieldDialogAddBage.getText();
-        descrip = tareaDialogAddBdescrip.getText();
-        weight = tfieldDialogAddBweight.getText();
-        price = tfieldDialogAddBorderPrice.getText();
-        sale_price = tfieldDialogAddBsellPrice.getText();
-        rest = tfieldDialogAddBquantity.getText();
-        tags = tfieldDialogAddBtags.getText();
-
-            if(imgFile != null) {
-                return BookDAO.insertBook(name, age, descrip, weight, price, sale_price, rest, tags, imgFile);
-            }
-            else {
-                return BookDAO.insertBook(name, age, descrip, weight, price, sale_price, rest, tags);
-            }
+        if(imgFile != null) {
+            return BookDAO.insertBook(name, age, descrip, weight, price, sale_price, rest, tags, imgFile);
+        }
+        else {
+            return BookDAO.insertBook(name, age, descrip, weight, price, sale_price, rest, tags);
+        }
     }
 
-    public void onAddBook(ActionEvent actionEvent) {
+    public void onAddBook() {
         try {
             isAdded = addNewBook();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        if(isAdded){
+            ((Stage)tfieldDialogAddBtags.getScene().getWindow()).close();
+        }
     }
 
-    public void onCancel(ActionEvent actionEvent) {
+    public void onCancel() {
         ((Stage) btnDialogAddBCancel.getScene().getWindow()).close();
     }
 
@@ -150,7 +148,6 @@ public class AddBookController {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 }
 
