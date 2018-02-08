@@ -13,68 +13,49 @@
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="256.0" AnchorPane.topAnchor="10.0">
          <children>
-            <VBox layoutX="5.0" layoutY="10.0" prefHeight="390.0" prefWidth="744.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <HBox prefHeight="25.0" prefWidth="750.0">
-                     <children>
-                        <TextField prefHeight="25.0" prefWidth="329.0">
-                           <HBox.margin>
-                              <Insets left="10.0" right="10.0" />
-                           </HBox.margin>
-                        </TextField>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Знайти">
-                           <HBox.margin>
-                              <Insets left="10.0" right="10.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
-                  <AnchorPane prefHeight="254.0" prefWidth="750.0" VBox.vgrow="ALWAYS">
-                     <children>
-                        <TableView fx:id="tableClients" prefHeight="200.0" prefWidth="750.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <columns>
-                              <TableColumn fx:id="idClientClmn" prefWidth="28.0" text="№" />
-                              <TableColumn fx:id="fioClientClmn" prefWidth="118.0" text="ФІО" />
-                              <TableColumn fx:id="emailClientClmn" prefWidth="63.0" text="Email" />
-                              <TableColumn fx:id="telClientClmn" prefWidth="58.0" text="Тел." />
-                              <TableColumn fx:id="addressClientClmn" prefWidth="94.0" text="Адреса" />
-                              <TableColumn fx:id="ordersClientClmn" prefWidth="85.0" text="Замовлення" />
-                              <TableColumn fx:id="notesClientClmn" prefWidth="55.0" text="Нотатки" />
-                              <TableColumn fx:id="fromClientClmn" prefWidth="85.0" text="Звідки" />
-                              <TableColumn fx:id="dateClientClmn" prefWidth="102.0" text="Дата" />
-                           </columns>
-                        </TableView>
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-                     </VBox.margin>
-                  </AnchorPane>
-                  <AnchorPane VBox.vgrow="NEVER">
-                     <children>
-                        <Button layoutX="10.0" layoutY="5.0" mnemonicParsing="false" text="Додати клієнта">
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button layoutX="290.0" layoutY="5.0" mnemonicParsing="false" text="В архів">
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button layoutX="207.0" layoutY="5.0" mnemonicParsing="false" text="Видалити">
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button layoutX="119.0" layoutY="5.0" mnemonicParsing="false" text="Редагувати">
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </AnchorPane>
-               </children>
-            </VBox>
+            <Button fx:id="btnSearchClients" layoutX="448.0" layoutY="10.0" mnemonicParsing="false" onAction="#onSearch" prefHeight="25.0" prefWidth="99.0" text="Знайти" AnchorPane.rightAnchor="190.0">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Button>
+            <TextField fx:id="txtSearchClients" layoutX="20.0" layoutY="10.0" onAction="#onSearch" prefHeight="25.0" prefWidth="335.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="300.0">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </TextField>
+            <TableView fx:id="tableClients" layoutX="15.0" layoutY="45.0" prefHeight="553.0" prefWidth="710.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0">
+               <columns>
+                  <TableColumn fx:id="idClientClmn" prefWidth="28.0" text="№" />
+                  <TableColumn fx:id="fioClientClmn" prefWidth="118.0" text="ФІО" />
+                  <TableColumn fx:id="emailClientClmn" prefWidth="63.0" text="Email" />
+                  <TableColumn fx:id="telClientClmn" prefWidth="58.0" text="Тел." />
+                  <TableColumn fx:id="addressClientClmn" prefWidth="94.0" text="Адреса" />
+                  <TableColumn fx:id="ordersClientClmn" prefWidth="85.0" text="Замовлення" />
+                  <TableColumn fx:id="notesClientClmn" prefWidth="55.0" text="Нотатки" />
+                  <TableColumn fx:id="fromClientClmn" prefWidth="85.0" text="Звідки" />
+                  <TableColumn fx:id="dateClientClmn" prefWidth="102.0" text="Дата" />
+               </columns>
+            </TableView>
+            <Button fx:id="btnAddClients" layoutX="15.0" layoutY="610.0" mnemonicParsing="false" onAction="#onAddeClient" text="Додати клієнта" AnchorPane.bottomAnchor="5.0">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnArchivehClients" layoutX="295.0" layoutY="610.0" mnemonicParsing="false" onAction="#onArchiveClient" text="В архів" AnchorPane.bottomAnchor="5.0">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnDeleteClients" layoutX="212.0" layoutY="610.0" mnemonicParsing="false" onAction="#onRemoveClient" text="Видалити" AnchorPane.bottomAnchor="5.0">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnEditClients" layoutX="124.0" layoutY="610.0" mnemonicParsing="false" onAction="#onEditClient" text="Редагувати" AnchorPane.bottomAnchor="5.0">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </Button>
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
@@ -82,7 +63,7 @@
       </AnchorPane>
       <AnchorPane layoutX="753.0" layoutY="10.0" prefHeight="415.0" prefWidth="259.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
          <children>
-            <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="19.0" layoutY="280.0" prefHeight="25.0" prefWidth="207.0" text="Київ, Тростянецька 7а" textAlignment="CENTER" AnchorPane.leftAnchor="19.0">
+            <Label fx:id="lblAddrClients" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="19.0" layoutY="280.0" prefHeight="25.0" prefWidth="207.0" text="Київ, Тростянецька 7а" textAlignment="CENTER" AnchorPane.leftAnchor="19.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -93,7 +74,7 @@
                   <Insets left="10.0" />
                </VBox.margin>
             </Label>
-            <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="19.0" layoutY="86.0" prefHeight="25.0" prefWidth="216.0" text="Палій Д.М." textAlignment="CENTER" AnchorPane.leftAnchor="19.0">
+            <Label fx:id="lblFullNameClients" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="19.0" layoutY="86.0" prefHeight="25.0" prefWidth="216.0" text="Палій Д.М." textAlignment="CENTER" AnchorPane.leftAnchor="19.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -109,7 +90,7 @@
                   <Insets left="10.0" right="20.0" />
                </VBox.margin>
             </Separator>
-            <Label layoutX="10.0" layoutY="30.0" prefHeight="27.0" prefWidth="231.0" text="Палій Дмитро" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="30.0">
+            <Label fx:id="lblNameClients" layoutX="10.0" layoutY="30.0" prefHeight="27.0" prefWidth="231.0" text="Палій Дмитро" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="30.0">
                <font>
                   <Font size="18.0" />
                </font>
@@ -122,7 +103,7 @@
                   <Insets left="5.0" />
                </padding>
             </Label>
-            <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="19.0" layoutY="217.0" prefHeight="25.0" prefWidth="207.0" text="0936791011" textAlignment="CENTER" AnchorPane.leftAnchor="19.0">
+            <Label fx:id="lblTelClients" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="19.0" layoutY="217.0" prefHeight="25.0" prefWidth="207.0" text="0936791011" textAlignment="CENTER" AnchorPane.leftAnchor="19.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -163,7 +144,7 @@
                   <Insets left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </Label>
-            <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="19.0" layoutY="344.0" prefHeight="25.0" prefWidth="207.0" text="https://www.instagram.com/book_bambook/" textAlignment="CENTER" AnchorPane.leftAnchor="19.0">
+            <Label fx:id="lblFromClients" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="19.0" layoutY="344.0" prefHeight="25.0" prefWidth="207.0" text="https://www.instagram.com/book_bambook/" textAlignment="CENTER" AnchorPane.leftAnchor="19.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -210,7 +191,7 @@
                   <Insets left="5.0" />
                </padding>
             </Label>
-            <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="21.0" layoutY="149.0" prefHeight="25.0" prefWidth="207.0" text="paliy@paliy.com" textAlignment="CENTER">
+            <Label fx:id="lblEmailClients" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="21.0" layoutY="149.0" prefHeight="25.0" prefWidth="207.0" text="paliy@paliy.com" textAlignment="CENTER">
                <font>
                   <Font size="14.0" />
                </font>

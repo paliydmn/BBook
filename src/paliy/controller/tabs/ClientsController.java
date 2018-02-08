@@ -1,22 +1,42 @@
 package paliy.controller.tabs;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 import paliy.controller.MainController;
 import paliy.model.Clients;
 import paliy.model.ClientsDAO;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ClientsController {
 
+    public Label lblAddrClients;
+    public Label lblFullNameClients;
+    public Label lblNameClients;
+    public Label lblTelClients;
+    public Label lblFromClients;
+    public Label lblEmailClients;
+    public Button btnSearchClients;
+    public TextField txtSearchClients;
+    public Button btnAddClients;
+    public Button btnArchivehClients;
+    public Button btnDeleteClients;
+    public Button btnEditClients;
     private MainController main;
 
     @FXML
-    public TableView tableClients;
+    public TableView<Clients> tableClients;
 
     @FXML
     public TableColumn<Clients, Integer> idClientClmn;
@@ -37,6 +57,11 @@ public class ClientsController {
     @FXML
     public TableColumn<Clients, Date> dateClientClmn;
 
+
+    private AutoCompletionBinding<String> autoCompletionBinding;
+    private List<String> fioList = new ArrayList<>();
+
+
     public void init(MainController mainController) {
         System.out.println("tabClients Initialization");
         main = mainController;
@@ -55,6 +80,65 @@ public class ClientsController {
         dateClientClmn.setCellValueFactory(cellData -> cellData.getValue().addedDateProperty());
 
         fillMainTabTable();
+        refreshAutoComplet();
+        //Auto completed listener
+
+
+        autoCompletionBinding.setOnAutoCompleted(autoCompleted -> {
+            List<Clients> clientsList = ClientsDAO.getObsClientsList().stream()
+                    .filter(item -> item.getClientFio().equals(autoCompleted.getCompletion()))
+                    .collect(Collectors.toList());
+            tableClients.setItems(FXCollections.observableList(clientsList));
+
+            /* if(client != null){
+                txtFieadMainClientFIO.setText(client.getClientFio());
+                txtFieadMainClientAddress.setText(client.getClientAddress());
+                txtFieadMainClientTel.setText(client.getClientTel());
+            }
+            lblMainOrderDate.setText(sdf.format(Calendar.getInstance().getTime()));*/
+            System.out.println(autoCompleted.getCompletion());
+        });
+
+        btnSearchClients.setOnKeyPressed(event -> {
+           if(event.getCode() == KeyCode.ENTER )
+               onSearch();
+        });
+
+        btnSearchClients.setOnMouseClicked(event -> {
+            if(event.getButton() == MouseButton.PRIMARY)
+                onSearch();
+        });
+
+        // Show first book on Preview
+        updatePreview(tableClients.getItems().get(0));
+        // Show book on Preview
+        tableClients.setRowFactory(tv -> {
+            TableRow<Clients> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty() && event.getButton()== MouseButton.PRIMARY
+                        && event.getClickCount() == 1) {
+                    updatePreview(row.getItem());
+                    System.out.println("Book found in table and added to PreView side!");
+                }
+            });
+            return row ;
+        });
+
+    }
+
+    private void updatePreview(Clients client){
+        lblNameClients.setText(client.getClientFio());
+        lblAddrClients.setText(client.getClientAddress());
+        lblEmailClients.setText(client.getClientEmail());
+        lblFromClients.setText(client.getClientFrom());
+        lblTelClients.setText(client.getClientTel());
+    }
+
+    private void refreshAutoComplet() {
+        if(autoCompletionBinding != null){
+            autoCompletionBinding.dispose();
+        }
+        autoCompletionBinding = TextFields.bindAutoCompletion(txtSearchClients, fioList);
     }
 
     //Search all Books
@@ -72,12 +156,44 @@ public class ClientsController {
         }
     }
 
-    //Populate Books for TableView
+    //Populate Clients for TableView
     @FXML
     private void populateClients(ObservableList<Clients> clientsData) throws ClassNotFoundException {
-        //Set items to the employeeTable
+        //Set items to the clients table
+        tableClients.setItems(clientsData);
+
+        // fill name list for quick search
+        for(Clients fio : clientsData){
+            fioList.add(fio.getClientFio());
+        }
+    }
+
+
+    public void onSearch() {
+        try {
+            populateFoundClients(ClientsDAO.searchClientsResult(txtSearchClients.getText()));
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Populate Clients for TableView
+    @FXML
+    private void populateFoundClients(ObservableList<Clients> clientsData) throws ClassNotFoundException {
+        //Set items to the clients table
         tableClients.setItems(clientsData);
     }
 
 
+    public void onAddeClient(ActionEvent actionEvent) {
+    }
+
+    public void onArchiveClient(ActionEvent actionEvent) {
+    }
+
+    public void onRemoveClient(ActionEvent actionEvent) {
+    }
+
+    public void onEditClient(ActionEvent actionEvent) {
+    }
 }

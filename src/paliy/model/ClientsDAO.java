@@ -17,6 +17,40 @@ public class ClientsDAO {
     //*******************************
     //SELECT  Clients
     //*******************************
+    public static ObservableList<Clients> searchClientsResult(String searchParam) throws SQLException, ClassNotFoundException{
+
+        String selectStmt;
+        //Declare a SELECT statement
+        if(searchParam.startsWith("#") || searchParam.startsWith("№")){
+            selectStmt = "SELECT * FROM clients WHERE client_id='"+searchParam.substring(1,searchParam.length())+"'";
+        }else {
+            selectStmt = "SELECT * FROM clients WHERE LOWER (fio) Like LOWER ('%" + searchParam + "%')";
+        }
+
+        //Execute SELECT statement
+        try {
+            //Get ResultSet from dbExecuteQuery method
+            ResultSet rsClients = DBUtil.dbExecuteQuery(selectStmt);
+            //Send ResultSet to the getBookFromResultSet method and get employee object
+            return getClientsFromResultSet(rsClients);
+        } catch (SQLException e) {
+            System.out.println("While searching an Book with " + searchParam + " name, an error occurred: " + e);
+            //Return exception
+            throw e;
+        }
+    }
+    //Use ResultSet from DB as parameter and set Book Object's attributes and return book object.
+    private static ObservableList<Clients> getClientsFromResultSet(ResultSet rs) throws SQLException, ClassNotFoundException {
+        ObservableList<Clients> foundItems = FXCollections.observableArrayList();
+        while (rs.next()) {
+            foundItems.add(getClientsData(rs));
+        }
+        return foundItems;
+    }
+
+   //*******************************
+    //SELECT  Clients
+    //*******************************
     public static void getAllItemsFromTable() throws SQLException, ClassNotFoundException {
         //Declare a SELECT statement
         String selectStmt = "SELECT * FROM clients";
