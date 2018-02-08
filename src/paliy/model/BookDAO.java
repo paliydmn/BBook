@@ -15,7 +15,7 @@ import java.util.List;
 public class BookDAO {
 
 
-    static ObservableList<Book> obsBooksList;
+    private static ObservableList<Book> obsBooksList;
 
     //*******************************
     //SELECT a Book
@@ -23,7 +23,7 @@ public class BookDAO {
 
     public static ObservableList<Book> searchBookResult(String searchParam) throws SQLException, ClassNotFoundException{
 
-        String selectStmt = null;
+        String selectStmt;
         //Declare a SELECT statement
         if(searchParam.startsWith("#") || searchParam.startsWith("№")){
             selectStmt = "SELECT * FROM book WHERE book_id='"+searchParam.substring(1,searchParam.length())+"'";
@@ -245,13 +245,13 @@ public class BookDAO {
 
     //*************************************
 
-    //DELETE book
+    //DELETE books
     //*************************************
     public static void deleteBooksByName(List<String> bookNames) throws SQLException, ClassNotFoundException {
         //Declare a DELETE statement
         StringBuilder names = new StringBuilder(bookNames.size());
         for(String s : bookNames){
-                names.append("'"+s+"',");
+                names.append("'").append(s).append("',");
         }
         String updateStmt =
                 "BEGIN\n" +
@@ -347,7 +347,7 @@ public class BookDAO {
     }
 
     public static Image getImageByName(String bookName) throws SQLException  {
-        try ( PreparedStatement ps = DBUtil.dbGetConnection().prepareStatement("SELECT image FROM book WHERE name = ?");){
+        try ( PreparedStatement ps = DBUtil.dbGetConnection().prepareStatement("SELECT image FROM book WHERE name = ?")){
             ps.setString(1, bookName);
             ResultSet rs = ps.executeQuery();
             Image img = null ;
