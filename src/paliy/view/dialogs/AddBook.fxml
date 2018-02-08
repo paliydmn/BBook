@@ -67,7 +67,7 @@
             <Font name="Verdana" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="11.0" layoutY="214.0" text="Вага:">
+      <Label layoutX="11.0" layoutY="214.0" text="Вага  (чис):">
          <VBox.margin>
             <Insets bottom="10.0" />
          </VBox.margin>
