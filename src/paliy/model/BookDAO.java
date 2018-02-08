@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.*;
+import java.util.List;
 
 public class BookDAO {
 
@@ -246,12 +247,16 @@ public class BookDAO {
 
     //DELETE book
     //*************************************
-    public static void deleteBookByName(String bookName) throws SQLException, ClassNotFoundException {
+    public static void deleteBooksByName(List<String> bookNames) throws SQLException, ClassNotFoundException {
         //Declare a DELETE statement
+        StringBuilder names = new StringBuilder(bookNames.size());
+        for(String s : bookNames){
+                names.append("'"+s+"',");
+        }
         String updateStmt =
                 "BEGIN\n" +
                         "   DELETE FROM book\n" +
-                        "         WHERE name ='"+ bookName +"';\n" +
+                        "         WHERE name in ("+ names.deleteCharAt(names.length() -1)+");\n" +
                         "   COMMIT;\n" +
                         "END;";
         //Execute UPDATE operation

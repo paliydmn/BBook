@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -19,7 +18,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
@@ -39,6 +37,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
@@ -208,6 +207,7 @@ public class MainTabController {
         setTableEditable();
         setupInlineEdit();
 
+        tableMainBook.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         // Show first book on Preview
         updatePreview(tableMainBook.getItems().get(0));
         // Show book on Preview
@@ -571,29 +571,37 @@ public class MainTabController {
     }
 
     public void onBookRemove(ActionEvent actionEvent) {
-        Book b = tableMainBook.getSelectionModel().getSelectedItem();
-        String bName = "";
+      //  Book b = tableMainBook.getSelectionModel().getSelectedItem();
+        List<Book> bList = tableMainBook.getSelectionModel().getSelectedItems();
+        List<String> bNameList = new ArrayList<>();
+        for(Book book : bList){
+            bNameList.add(book.getBookName());
+        }
+        String bNames = "";
         String cont = "";
         boolean isSelected = false;
-        if(b == null){
-            bName = "Книга не обрана!";
-            cont  = "Закрийте діалог та виберіть книгу для видалення.";
+        if(bList.size() <= 0){
+            bNames = "Не обрано жодної Книги!";
+            cont  = "Закрийте діалог та виберіть книгу(и) для видалення.";
         }else {
             isSelected = true;
-            bName = b.getBookName();
-            cont = "Книга буде видалена із бази!";
+            bNames = bNameList.toString();
+            if(bNameList.size() > 1)
+                cont = "Книги будуть видалені із бази!";
+            else
+                cont = "Книга буде видалена із бази!";
         }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Видалення книги");
-        alert.setHeaderText(bName);
+        alert.setHeaderText(bNames);
         alert.setContentText(cont);
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK && isSelected){
             try {
-                BookDAO.deleteBookByName(b.getBookName());
+                BookDAO.deleteBooksByName(bNameList);
                 fillMainTabTable();
-                main.updateStatus("Книга " + bName + " була видалена із бази!");
+                main.updateStatus("Книга(и) " + bNames + " була видалена із бази!");
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
@@ -621,22 +629,18 @@ public class MainTabController {
             stage.setScene(new Scene(root));
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(((Node)actionEvent.getSource()).getScene().getWindow());
-            stage.show();
-
-        }catch (IOException e){
+            stage.showAndWait();
+        }catch (IOException ignored){
         }
 
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                if(AddBookController.isAdded){
-                    fillMainTabTable();
-                    updateOrderedPrice();
-                    updateAllBooksCount();
-                    updateUniqueBookCount();
-                }
-            }
-        });
+        if(AddBookController.isAdded){
+            System.out.println("Book Added");
+            fillMainTabTable();
+            updateOrderedPrice();
+            updateAllBooksCount();
+            updateUniqueBookCount();
+            AddBookController.isAdded = false;
+        }
     }
 
     public void onBookSearch(ActionEvent actionEvent) {
