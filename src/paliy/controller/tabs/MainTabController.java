@@ -618,9 +618,8 @@ public class MainTabController {
     }
 
     public void onBookAdd(ActionEvent actionEvent) {
-        Stage stage = null;
         try{
-            stage = new Stage();
+            Stage stage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("/paliy/view/dialogs/AddBook.fxml"));
             stage.setTitle("Додати нову книгу в базу");
             stage.setMinHeight(190);

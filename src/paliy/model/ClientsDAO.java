@@ -126,27 +126,26 @@ public class ClientsDAO {
 
     //INSERT new Client
     //*************************************
-    public static boolean insertClient(String fio, String email, String tel, String address, String from, String orders, String notes) throws SQLException, ClassNotFoundException {
+    public static boolean insertClient(String fio, String email, String tel, String address, String from, String notes) throws SQLException, ClassNotFoundException {
         String updateStmt =
                 "BEGIN\n" +
                         "INSERT INTO clients\n" +
-                        "(ID, FIO, EMAIL, TEL, ADDRESS, COME_FROM, ORDERS, ADDED_DATE, NOTES)\n" +
+                        "(ID, FIO, EMAIL, TEL, ADDRESS, COME_FROM, ADDED_DATE, NOTES)\n" +
                         "VALUES\n" +
-                        "(client_id_seq.nextval, '" + fio +
+                        "(clients_id_seq.nextval, '" + fio +
                         "','" + email +
                         "','" + tel +
                         "','" + address +
                         "','" + from +
-                        "','" + orders +
-                        " SYSDATE, "+
-                        "','" + notes +
+                        "'," + " SYSDATE,"+
+                        "'" + notes +
                         "');\n" +
                         "END;";
 
         try {
             DBUtil.dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {
-            System.out.print("Error occurred while DELETE Operation: " + e);
+            System.out.print("Error occurred while Inserting Operation: " + e);
             return false;
         }
         return true;

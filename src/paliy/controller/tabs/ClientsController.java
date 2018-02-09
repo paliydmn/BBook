@@ -4,15 +4,23 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 import paliy.controller.MainController;
+import paliy.controller.dialogs.AddClientController;
 import paliy.model.Clients;
 import paliy.model.ClientsDAO;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -118,7 +126,7 @@ public class ClientsController {
                 if (!row.isEmpty() && event.getButton()== MouseButton.PRIMARY
                         && event.getClickCount() == 1) {
                     updatePreview(row.getItem());
-                    System.out.println("Book found in table and added to PreView side!");
+                    System.out.println("Client found in table and added to PreView side!");
                 }
             });
             return row ;
@@ -128,6 +136,7 @@ public class ClientsController {
 
     private void updatePreview(Clients client){
         lblNameClients.setText(client.getClientFio());
+        lblFullNameClients.setText(client.getClientFio());
         lblAddrClients.setText(client.getClientAddress());
         lblEmailClients.setText(client.getClientEmail());
         lblFromClients.setText(client.getClientFrom());
@@ -141,7 +150,7 @@ public class ClientsController {
         autoCompletionBinding = TextFields.bindAutoCompletion(txtSearchClients, fioList);
     }
 
-    //Search all Books
+    //Search all Clients
     @FXML
     public void fillMainTabTable() {
         try {
@@ -185,7 +194,27 @@ public class ClientsController {
     }
 
 
-    public void onAddeClient(ActionEvent actionEvent) {
+    public void onAddedClient(ActionEvent actionEvent) {
+        try{
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/paliy/view/dialogs/AddClient.fxml"));
+            stage.setTitle("Додати нову книгу в базу");
+            stage.setMinHeight(190);
+            stage.setMinWidth(255);
+            //stage.setResizable(false);
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(((Node)actionEvent.getSource()).getScene().getWindow());
+            stage.showAndWait();
+        }catch (IOException ignored){
+        }
+
+        if(AddClientController.isAdded){
+            System.out.println("Client Added");
+            fillMainTabTable();
+            refreshAutoComplet();
+            AddClientController.isAdded = false;
+        }
     }
 
     public void onArchiveClient(ActionEvent actionEvent) {
