@@ -46,7 +46,7 @@ public class AddBookController {
     public static boolean isAdded = false;
 
     public static int bookId;
-    public ImageView imgAddBookDia;
+    public ImageView imgAddBookDao;
     public Label lblWarning;
 
     private File imgFile = null;
@@ -144,7 +144,7 @@ public class AddBookController {
             List<File> files = board.getFiles();
             imgFile = files.get(0);
             Image image = new Image(new FileInputStream(imgFile));
-            imgAddBookDia.setImage(image);
+            imgAddBookDao.setImage(image);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

@@ -2,6 +2,7 @@ package paliy.controller.tabs;
 
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
@@ -25,10 +26,7 @@ import paliy.EditCell;
 import paliy.MyIntegerStringConverter;
 import paliy.controller.MainController;
 import paliy.controller.dialogs.AddBookController;
-import paliy.model.Book;
-import paliy.model.BookDAO;
-import paliy.model.Clients;
-import paliy.model.ClientsDAO;
+import paliy.model.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,10 +35,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class MainTabController {
 
@@ -91,17 +86,17 @@ public class MainTabController {
     public TableColumn<Book, Integer> bookYearClmn;
 */
     @FXML
-    public TableView tableMainOrder;
+    public TableView<TmpOrder> tableMainOrder;
     @FXML
-    public TableColumn orderIdClmn;
+    public TableColumn<TmpOrder, Integer> orderIdClmn;
     @FXML
-    public TableColumn orderBookNameClmn;
+    public TableColumn<TmpOrder, String> orderBookNameClmn;
     @FXML
-    public TableColumn orderBookWeightClmn;
+    public TableColumn<TmpOrder, Integer>  orderBookWeightClmn;
     @FXML
-    public TableColumn orderBookQuantityClmn;
+    public TableColumn<TmpOrder, Integer> orderBookQuantityClmn;
     @FXML
-    public TableColumn orderBookPriceClmn;
+    public TableColumn<TmpOrder, Integer>  orderBookPriceClmn;
     @FXML
     public TableColumn orderCleanItem;
 
@@ -240,6 +235,27 @@ public class MainTabController {
             lblMainOrderDate.setText(sdf.format(Calendar.getInstance().getTime()));
             System.out.println(autoCompleted.getCompletion());
         });
+
+
+// Table Order. Temp table.
+        orderIdClmn.setCellValueFactory(cell -> cell.getValue().tmpOrderNumProperty().asObject());
+        orderBookNameClmn.setCellValueFactory(cell -> cell.getValue().tmpOrderNameProperty());
+        orderBookWeightClmn.setCellValueFactory(cell -> cell.getValue().tmpOrderWeightProperty().asObject());
+        orderBookPriceClmn.setCellValueFactory(cell -> cell.getValue().tmpOrderPriceProperty().asObject());
+        orderBookQuantityClmn.setCellValueFactory(cell -> cell.getValue().tmpOrderQuantityProperty().asObject());
+        //orderBookQuantityClmn.setCellFactory(getTmpOrderCellFactory());
+
+        tableMainOrder.setItems(orderData);
+
+        // init drop down lists for tmp order
+        dropDMainOrderedFrom.setItems(FXCollections.observableList(Arrays.asList("Instagram","Facebook", "Other")));
+        dropDMainOrderedFrom.getSelectionModel().selectFirst();
+
+        dropDMainSendVia.setItems(FXCollections.observableList(Arrays.asList("НП","УкрП", "Доставка", "Самовивіз")));
+        dropDMainSendVia.getSelectionModel().selectFirst();
+
+        // disabled if no items in order list
+        btnMainCreateOrder.setDisable(true);
 
         System.out.println("Main Tab Init completed!");
     }
@@ -400,7 +416,7 @@ public class MainTabController {
             book.getBookId();
             try {
                 if(!oldValue.equals(value)){
-                    BookDAO.updateBookRest(String.valueOf(book.getBookId()), String.valueOf(value));
+                    BookDAO.updateBookWeight(String.valueOf(book.getBookId()), String.valueOf(value));
                 }
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
@@ -561,9 +577,9 @@ public class MainTabController {
     private void populateAndShowBook(ObservableList<Book> bookList) throws ClassNotFoundException {
         if (bookList != null) {
             tableMainBook.setItems(bookList);
-           // setEmpInfoToTextArea(emp);
+           // setEmpInfoToTextArea(book);
         } else {
-          //  resultArea.setText("This employee does not exist!\n");
+          //  resultArea.setText("This book does not exist!\n");
         }
     }
 
@@ -608,11 +624,61 @@ public class MainTabController {
         }
     }
 
-    public void onBookAddToOrder(ActionEvent actionEvent) {
+    final ObservableList<TmpOrder> orderData = FXCollections.observableArrayList();
+    int orderNum = 1;
+
+    public void onBookAddToOrder() {
+         Book book = tableMainBook.getSelectionModel().getSelectedItem();
+
+        if(orderData != null && book.getRest() >= 1){
+            boolean isAvail = false;
+            if(orderData.isEmpty()){
+                TmpOrder itemOrder = new TmpOrder(orderNum++, book.getBookId(), book.getBookName(),book.getWeight(), 1, book.getSalePrice());
+                orderData.add(itemOrder);
+            }else {
+                for (TmpOrder item : orderData){
+                    if(item.getBookId() == book.getBookId() ){
+                        item.setQuantity(item.getQuantity()+1);
+                        orderData.set(orderData.indexOf(item), item);
+                        isAvail = true;
+                    }
+                }
+                if(!isAvail){
+                    TmpOrder itemOrder = new TmpOrder(orderNum++, book.getBookId(), book.getBookName(),book.getWeight(), 1, book.getSalePrice());
+                    orderData.add(itemOrder);
+                }
+            }
+            updateTmpOrderPrice(orderData);
+            updateTmpOrderWeight(orderData);
+            book.setRest(book.getRest() - 1);
+        }
+        btnMainCreateOrder.setDisable(false);
     }
 
-    public void onBookEdit(ActionEvent actionEvent) {
+    private void updateTmpOrderWeight(ObservableList<TmpOrder> orderData) {
+        if(orderData.isEmpty()){
+            lbaMainParcelWeight.setText("0");
+        }else {
+            int weight = 0;
+            for (TmpOrder item : orderData){
+                weight += item.getWeight()*item.getQuantity();
+            }
+            lbaMainParcelWeight.setText(String.valueOf(weight));
+        }
     }
+
+    private void updateTmpOrderPrice(ObservableList<TmpOrder> orderData) {
+        if(orderData.isEmpty()){
+            lbaMainParcelPrice.setText("0");
+        }else {
+            int price = 0;
+            for (TmpOrder item : orderData){
+                price += item.getPrice()*item.getQuantity();
+            }
+            lbaMainParcelPrice.setText(String.valueOf(price));
+        }
+    }
+
 
     public void onBookArchive(ActionEvent actionEvent) {
     }
@@ -682,6 +748,7 @@ public class MainTabController {
   /*  @FXML
     private ImageView imgMainBookImage;
 */
+
     @FXML
     void imageDragOver(DragEvent de) {
         Dragboard board = de.getDragboard();
@@ -689,7 +756,6 @@ public class MainTabController {
             de.acceptTransferModes(TransferMode.ANY);
         }
     }
-
     @FXML
     void imageDropped(DragEvent de) {
         File imgFile = null;
@@ -724,4 +790,133 @@ public class MainTabController {
         }
         main.updateStatus("Картинка була видалена із бази!");
     }
+
+
+    public void onBookEdit(ActionEvent actionEvent) {
+    }
+
+
+    public void onCommitOrder() throws SQLException, ClassNotFoundException {
+
+        for(TmpOrder item : orderData){
+           int quantity =  BookDAO.getBookByID(String.valueOf(item.getBookId())).getRest() - item.getQuantity();
+            BookDAO.updateBookRest(String.valueOf(item.getBookId()), String.valueOf(quantity));
+        }
+
+        orderData.clear();
+        orderNum = 1;
+        updateTmpOrderWeight(orderData);
+        updateTmpOrderPrice(orderData);
+        clearClientFields();
+
+    }
+
+    private void clearClientFields() {
+        txtFieadMainClientTel.clear();
+        txtFieadMainClientAddress.clear();
+        txtFieadMainClientFIO.clear();
+    }
 }
+
+/*
+ public AnchorPane getAnchorPaneTemplate(){
+        AnchorPane anchorPane = new AnchorPane();
+        anchorPane.minWidth(35.0);
+        anchorPane.minHeight(90.0);
+
+        Button btnMinus = new Button("-");
+        AnchorPane.setBottomAnchor(btnMinus,4.0);
+        AnchorPane.setRightAnchor(btnMinus,2.0);
+        AnchorPane.setTopAnchor(btnMinus,4.0);
+
+        Button btnPlus = new Button("+");
+        AnchorPane.setBottomAnchor(btnPlus,4.0);
+        AnchorPane.setLeftAnchor(btnPlus,2.0);
+        AnchorPane.setTopAnchor(btnPlus,4.0);
+
+        TextField tf = new TextField("1");
+        tf.setAlignment(Pos.BASELINE_CENTER);
+        tf.maxWidth(10.0);
+        tf.prefWidth(10.0);
+        tf.prefHeight(10.0);
+        tf.maxHeight(10);
+        AnchorPane.setBottomAnchor(tf,4.0);
+        AnchorPane.setLeftAnchor(tf,30.0);
+        AnchorPane.setRightAnchor(tf,30.0);
+        AnchorPane.setTopAnchor(tf,4.0);
+
+        anchorPane.getChildren().addAll(btnMinus,tf,btnPlus);
+
+        return anchorPane;
+    }
+
+Callback<TableColumn<TmpOrder, String>, TableCell<TmpOrder, String>> cellFactory = null;
+     public Callback<TableColumn<TmpOrder, String>, TableCell<TmpOrder, String>> getTmpOrderCellFactory(){
+        cellFactory = new Callback<TableColumn<TmpOrder, String>, TableCell<TmpOrder, String>>() {
+                     @Override
+                     public TableCell call(final TableColumn<TmpOrder, String> param) {
+                         final TableCell<TmpOrder, String> cell = new TableCell<TmpOrder, String>() {
+
+                             @Override
+                             public void updateItem(String item, boolean empty) {
+                                 super.updateItem(item, empty);
+                                 AnchorPane anchorPane = getAnchorPaneTemplate();
+                                 if (empty) {
+                                     setGraphic(null);
+                                     setText(null);
+                                 } else {
+                                     Button btn = (Button) anchorPane.getChildren().get(0);
+                                     TextField tf = (TextField) anchorPane.getChildren().get(1);
+                                     Button btn2 = (Button) anchorPane.getChildren().get(2);
+                                     if(tableMainOrder.getSelectionModel().getSelectedItem() != null)
+                                     tf.setText( tableMainOrder.getSelectionModel().getSelectedItem().getQuantity());
+                                     btn.setOnAction(event -> {
+                                         this.setFocused(true);
+                                         TmpOrder tmpOrder = tableMainOrder.getSelectionModel().getSelectedItem();
+                                         Book book1 = null;
+                                         for(Book b : BookDAO.getObsBooksList()){
+                                             if(b.getBookId() == tmpOrder.getBookId()){
+                                                 book1 = b;
+                                             }
+                                         }
+                                         if(!tf.equals("")){
+                                             int quantity = Integer.parseInt(tf.getText());
+                                             if (quantity >= 2 ) {
+                                                 tf.setText(String.valueOf(quantity - 1));
+                                                 book1.setRest(book1.getRest() + 1);
+                                             }
+                                         }
+                                     });
+                                     setGraphic(anchorPane);
+                                     setText(null);
+
+                                     btn2.setOnAction(event -> {
+                                         this.setFocused(true);
+                                         TmpOrder tmpOrder = tableMainOrder.getSelectionModel().getSelectedItem();
+                                         Book book1 = null;
+                                         for(Book b : BookDAO.getObsBooksList()){
+                                             if(b.getBookId() == tmpOrder.getBookId()){
+                                                 book1 = b;
+                                             }
+                                         }
+                                         int quantity = Integer.parseInt(tf.getText());
+                                         if(book1.getRest() >= 1 ){
+                                             tf.setText(String.valueOf(++quantity));
+                                             book1.setRest(book1.getRest() - 1);
+                                             for(int i = 0; i < orderData.size(); i++){
+                                                 if(tmpOrder.getBookId() == orderData.get(i).getBookId())
+                                                     orderData.get(i).setQuantity(String.valueOf(quantity));
+                                                     tmpOrder.setQuantity(String.valueOf(quantity));
+                                             }
+                                         }
+                                     });
+                                     setGraphic(anchorPane);
+                                     setText(null);
+                                 }
+                             }
+                         };
+                         return cell;
+                     }
+                 };
+         return cellFactory;
+     }*/

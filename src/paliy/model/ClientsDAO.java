@@ -34,7 +34,7 @@ public class ClientsDAO {
             //Send ResultSet to the getBookFromResultSet method and get employee object
             return getClientsFromResultSet(rsClients);
         } catch (SQLException e) {
-            System.out.println("While searching an Book with " + searchParam + " name, an error occurred: " + e);
+            System.out.println("While searching a Client with " + searchParam + " name, an error occurred: " + e);
             //Return exception
             throw e;
         }
@@ -172,4 +172,24 @@ public class ClientsDAO {
         return null;
     }
 
+    public static void deleteClientByName(List<String> cNameList) {
+        StringBuilder names = new StringBuilder(cNameList.size());
+        for(String s : cNameList){
+            names.append("'").append(s).append("',");
+        }
+        String updateStmt =
+                "BEGIN\n" +
+                        "   DELETE FROM clients\n" +
+                        "         WHERE fio in ("+ names.deleteCharAt(names.length() -1)+");\n" +
+                        "   COMMIT;\n" +
+                        "END;";
+        //Execute UPDATE operation
+        try {
+            DBUtil.dbExecuteUpdate(updateStmt);
+        } catch (SQLException e) {
+            System.out.print("Error occurred while DELETE Clients Operation: " + e);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }

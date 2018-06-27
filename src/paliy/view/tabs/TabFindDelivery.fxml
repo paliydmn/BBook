@@ -12,45 +12,41 @@
    <children>
           <AnchorPane prefHeight="1005.0" prefWidth="744.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="256.0" AnchorPane.topAnchor="0.0">
              <children>
-            <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane layoutX="10.0" layoutY="35.0" prefHeight="20.0" prefWidth="724.0">
                <children>
-                  <AnchorPane>
-                     <children>
-                               <Button layoutX="294.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Знайти" AnchorPane.rightAnchor="10.0">
-                                   <HBox.margin>
-                                       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                   </HBox.margin>
-                               </Button>
-                               <TextField layoutX="11.0" layoutY="10.0" prefHeight="25.0" prefWidth="270.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="120.0">
-                                   <HBox.margin>
-                                       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                   </HBox.margin>
-                               </TextField>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane prefHeight="20.0" prefWidth="724.0">
-                     <children>
-                        <Label layoutX="2.0" layoutY="8.0" prefHeight="20.0" prefWidth="270.0" text="500132135400015258" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="120.0">
-                           <HBox.margin>
-                              <Insets top="10.0" />
-                           </HBox.margin>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Button layoutX="625.0" layoutY="5.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Очистити" AnchorPane.rightAnchor="0.0">
-                           <HBox.margin>
-                              <Insets left="10.0" right="10.0" top="10.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                     <VBox.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </VBox.margin>
-                  </AnchorPane>
-                  <WebView maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="700.0" prefWidth="600.0" />
+                  <Label layoutX="2.0" layoutY="8.0" prefHeight="20.0" prefWidth="270.0" text="500132135400015258" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="120.0">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="625.0" layoutY="5.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Очистити" AnchorPane.rightAnchor="15.0">
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
-            </VBox>
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+            </AnchorPane>
+            <AnchorPane>
+               <children>
+                         <Button layoutX="294.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Знайти" AnchorPane.rightAnchor="10.0">
+                             <HBox.margin>
+                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                             </HBox.margin>
+                         </Button>
+                         <TextField layoutX="11.0" layoutY="10.0" prefHeight="25.0" prefWidth="270.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="120.0">
+                             <HBox.margin>
+                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                             </HBox.margin>
+                         </TextField>
+               </children>
+            </AnchorPane>
+            <WebView fx:id="deliveryTabWView" layoutY="68.0" maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="317.0" prefWidth="714.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="68.0" />
              </children>
           </AnchorPane>
       <AnchorPane layoutX="763.0" layoutY="20.0" prefHeight="985.0" prefWidth="259.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

@@ -199,6 +199,15 @@
                   <Insets left="5.0" />
                </padding>
             </Label>
+            <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="379.0" prefHeight="25.0" prefWidth="216.0" text="Покупки" textAlignment="CENTER">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </Label>
+            <TreeView fx:id="listOrdersClientsTab" layoutX="27.0" layoutY="415.0" prefHeight="172.0" prefWidth="200.0" />
          </children>
       </AnchorPane>
    </children>

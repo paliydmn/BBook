@@ -3,12 +3,9 @@ package paliy.model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
-import paliy.util.DBUtil;
+import paliy.util.DBUtilSQLite;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
 import java.sql.*;
 import java.util.List;
 
@@ -22,7 +19,6 @@ public class BookDAO {
     //*******************************
 
     public static ObservableList<Book> searchBookResult(String searchParam) throws SQLException, ClassNotFoundException{
-
         String selectStmt;
         //Declare a SELECT statement
         if(searchParam.startsWith("#") || searchParam.startsWith("№")){
@@ -34,7 +30,7 @@ public class BookDAO {
         //Execute SELECT statement
         try {
             //Get ResultSet from dbExecuteQuery method
-            ResultSet rsBook = DBUtil.dbExecuteQuery(selectStmt);
+            ResultSet rsBook = DBUtilSQLite.dbExecuteQuery(selectStmt);
             //Send ResultSet to the getBookFromResultSet method and get employee object
             return getBookFromResultSet(rsBook);
         } catch (SQLException e) {
@@ -57,12 +53,12 @@ public class BookDAO {
     //*******************************
     public static void getAllItemsFromTable() throws SQLException, ClassNotFoundException {
         //Declare a SELECT statement
-        String selectStmt = "SELECT * FROM book";
+        String selectStmt = "SELECT * FROM BOOK";
 
         //Execute SELECT statement
         try {
             //Get ResultSet from dbExecuteQuery method
-            ResultSet rsBooks = DBUtil.dbExecuteQuery(selectStmt);
+            ResultSet rsBooks = DBUtilSQLite.dbExecuteQuery(selectStmt);
             //Send ResultSet to the getBookList method and get book object
             getBookList(rsBooks);
             //Return book object
@@ -92,7 +88,12 @@ public class BookDAO {
 
         book.setBookId(rs.getInt("BOOK_ID"));
         book.setBookName(rs.getString("NAME"));
-        book.setAddedDate(rs.getDate("ADDED_DATE"));
+
+       // Date added_date = Date.valueOf(rs.getString("ADDED_DATE"));
+        book.setAddedDate( Date.valueOf(rs.getString("ADDED_DATE")));
+
+        //book.setAddedDate(rs.getDate("ADDED_DATE"));
+
         book.setAge(rs.getString("AGE"));
         book.setDescription(rs.getString("DESCRIPTION"));
         book.setWeight(rs.getInt("WEIGHT"));
@@ -103,6 +104,9 @@ public class BookDAO {
         book.setTag(rs.getString("TAGS"));
 
         /*
+
+
+
         // Moved to Description field
         book.setDimensions(rs.getString("DIMENSIONS"));
         book.setLanguage(rs.getString("LANGUAGE"));
@@ -121,16 +125,20 @@ public class BookDAO {
     // *************************************
     public static void updateBookName (String bookId, String bookName) throws SQLException, ClassNotFoundException {
         //Declare a UPDATE statement
-        String updateStmt =
+        /*String updateStmt =
                 "BEGIN\n" +
                         "   UPDATE book\n" +
                         "      SET NAME = '" + bookName + "'\n" +
                         "    WHERE BOOK_ID = " + bookId + ";\n" +
                         "   COMMIT;\n" +
-                        "END;";
+                        "END;";*/
+         String updateStmt =
+                "UPDATE book\n" +
+                        "      SET NAME = '" + bookName + "'\n" +
+                        "    WHERE BOOK_ID = " + bookId;
         //Execute UPDATE operation
         try {
-            DBUtil.dbExecuteUpdate(updateStmt);
+            DBUtilSQLite.dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {
             System.out.print("Error occurred while UPDATE Operation: " + e);
             throw e;
@@ -139,15 +147,19 @@ public class BookDAO {
     public static void updateBookPrice(String bookId, String price)  throws SQLException, ClassNotFoundException {
         //Declare a UPDATE statement
         String updateStmt =
+                "UPDATE book\n" +
+                        "      SET PRICE = '" + price + "'\n" +
+                        "    WHERE BOOK_ID = " + bookId;
+        /* String updateStmt =
                 "BEGIN\n" +
                         "   UPDATE book\n" +
                         "      SET PRICE = '" + price + "'\n" +
                         "    WHERE BOOK_ID = " + bookId + ";\n" +
                         "   COMMIT;\n" +
                         "END;";
-        //Execute UPDATE operation
+        *///Execute UPDATE operation
         try {
-            DBUtil.dbExecuteUpdate(updateStmt);
+            DBUtilSQLite.dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {
             System.out.print("Error occurred while UPDATE Operation: " + e);
             throw e;
@@ -156,16 +168,19 @@ public class BookDAO {
 
     public static void updateBookSalePrice(String bookId, String salePrice)  throws SQLException, ClassNotFoundException {
         //Declare a UPDATE statement
-        String updateStmt =
+        String updateStmt ="   UPDATE book\n" +
+                        "      SET SALE_PRICE = '" + salePrice + "'\n" +
+                        "    WHERE BOOK_ID = " + bookId;
+        /* String updateStmt =
                 "BEGIN\n" +
                         "   UPDATE book\n" +
                         "      SET SALE_PRICE = '" + salePrice + "'\n" +
                         "    WHERE BOOK_ID = " + bookId + ";\n" +
                         "   COMMIT;\n" +
                         "END;";
-        //Execute UPDATE operation
+        *///Execute UPDATE operation
         try {
-            DBUtil.dbExecuteUpdate(updateStmt);
+            DBUtilSQLite.dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {
             System.out.print("Error occurred while UPDATE Operation: " + e);
             throw e;
@@ -174,16 +189,40 @@ public class BookDAO {
 
     public static void updateBookRest (String bookId, String rest) throws SQLException, ClassNotFoundException {
            //Declare a UPDATE statement
-           String updateStmt =
+           String updateStmt = "UPDATE book\n" +
+                           "      SET REST = '" + rest + "'\n" +
+                           "    WHERE BOOK_ID = " + bookId;
+           /*String updateStmt =
                    "BEGIN\n" +
                            "   UPDATE book\n" +
                            "      SET REST = '" + rest + "'\n" +
                            "    WHERE BOOK_ID = " + bookId + ";\n" +
                            "   COMMIT;\n" +
                            "END;";
-           //Execute UPDATE operation
+           *///Execute UPDATE operation
            try {
-               DBUtil.dbExecuteUpdate(updateStmt);
+               DBUtilSQLite.dbExecuteUpdate(updateStmt);
+           } catch (SQLException e) {
+               System.out.print("Error occurred while UPDATE Operation: " + e);
+               throw e;
+           }
+    }
+
+    public static void updateBookWeight (String bookId, String weight) throws SQLException, ClassNotFoundException {
+           //Declare a UPDATE statement
+           String updateStmt = "UPDATE book\n" +
+                           "      SET WEIGHT = '" + weight + "'\n" +
+                           "    WHERE BOOK_ID = " + bookId;
+           /*String updateStmt =
+                   "BEGIN\n" +
+                           "   UPDATE book\n" +
+                           "      SET REST = '" + rest + "'\n" +
+                           "    WHERE BOOK_ID = " + bookId + ";\n" +
+                           "   COMMIT;\n" +
+                           "END;";
+           *///Execute UPDATE operation
+           try {
+               DBUtilSQLite.dbExecuteUpdate(updateStmt);
            } catch (SQLException e) {
                System.out.print("Error occurred while UPDATE Operation: " + e);
                throw e;
@@ -192,16 +231,19 @@ public class BookDAO {
 
     public static void updateBookDescript (String bookId, String descr) throws SQLException, ClassNotFoundException {
            //Declare a UPDATE statement
-           String updateStmt =
+           String updateStmt ="   UPDATE book\n" +
+                           "      SET DESCRIPTION = '" + descr + "'\n" +
+                           "    WHERE BOOK_ID = " + bookId ;
+           /*  String updateStmt =
                    "BEGIN\n" +
                            "   UPDATE book\n" +
                            "      SET DESCRIPTION = '" + descr + "'\n" +
                            "    WHERE BOOK_ID = " + bookId + ";\n" +
                            "   COMMIT;\n" +
                            "END;";
-           //Execute UPDATE operation
+           *///Execute UPDATE operation
            try {
-               DBUtil.dbExecuteUpdate(updateStmt);
+               DBUtilSQLite.dbExecuteUpdate(updateStmt);
            } catch (SQLException e) {
                System.out.print("Error occurred while UPDATE Operation: " + e);
                throw e;
@@ -216,19 +258,23 @@ public class BookDAO {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        String updateStmt =
+       /* String updateStmt =
                    "BEGIN\n" +
                            "   UPDATE book\n" +
                            "      SET IMAGE = ? WHERE NAME ='" + bookName + "';\n" +
                            "   COMMIT;\n" +
-                           "END;";
+                           "END;";*/
+        String updateStmt = "UPDATE book SET IMAGE = ? WHERE NAME ='" + bookName + "'";
            //Execute UPDATE operation
         PreparedStatement ps = null;
         try {
-            Connection conn = DBUtil.dbGetConnection();
+            Connection conn = DBUtilSQLite.dbGetConnection();
             ps = conn.prepareStatement(updateStmt);
-            ps.setBinaryStream(1, fis, file.length());
+            // set binary for ojdb
+            //ps.setBinaryStream(1, fis, file.length());
+            ps.setBytes(1, readFile(file));
             ps.executeUpdate();
+            System.out.println("Stored the file in the Image BLOB column.");
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -236,7 +282,7 @@ public class BookDAO {
             if (ps != null) {
                 ps.close();
             }
-            DBUtil.dbDisconnect();
+            DBUtilSQLite.dbDisconnect();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -253,15 +299,11 @@ public class BookDAO {
         for(String s : bookNames){
                 names.append("'").append(s).append("',");
         }
-        String updateStmt =
-                "BEGIN\n" +
-                        "   DELETE FROM book\n" +
-                        "         WHERE name in ("+ names.deleteCharAt(names.length() -1)+");\n" +
-                        "   COMMIT;\n" +
-                        "END;";
+        String updateStmt ="   DELETE FROM book\n" +
+                        "         WHERE name in ("+ names.deleteCharAt(names.length() -1)+")";
         //Execute UPDATE operation
         try {
-            DBUtil.dbExecuteUpdate(updateStmt);
+            DBUtilSQLite.dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {
             System.out.print("Error occurred while DELETE Book Operation: " + e);
             throw e;
@@ -273,25 +315,39 @@ public class BookDAO {
     //*************************************
     public static boolean insertBook(String name, String age, String descrip, String weight, String price, String sale_price, String rest, String tags) throws SQLException, ClassNotFoundException {
         //Declare a INSERT statement
+/*
+//for ojdb
         String updateStmt =
-                "BEGIN\n" +
                         "INSERT INTO book\n" +
                         "(Book_ID, NAME, ADDED_DATE, AGE, DESCRIPTION, WEIGHT, REST, PRICE, SALE_PRICE, TAGS)\n" +
                         "VALUES\n" +
-                        "(book_id_seq.nextval, '" + name +
-                        "'," + " SYSDATE, '" + age +
+                        "(20, '" + name +
+                        "'," + " date('now'), '" + age +
                         "','" + descrip +
                         "','" + weight +
                         "','" + rest +
                         "','" + price +
                         "','" + sale_price +
                         "','"+tags +
-                        "');\n" +
-                        "END;";
+                        "');";*/
+ String updateStmt =
+                        "INSERT INTO book\n" +
+                        "(Book_ID, NAME, ADDED_DATE, AGE, DESCRIPTION, WEIGHT, REST, PRICE, SALE_PRICE, TAGS)\n" +
+                        "VALUES\n" +
+                        "(null, '" + name +
+                        "'," + " date('now'), '" + age +
+                        "','" + descrip +
+                        "','" + weight +
+                        "','" + rest +
+                        "','" + price +
+                        "','" + sale_price +
+                        "','"+tags +
+                        "')";
 
         //Execute DELETE operation
         try {
-            DBUtil.dbExecuteUpdate(updateStmt);
+          //  DBUtil.dbExecuteUpdate(updateStmt);
+            DBUtilSQLite.dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {
             System.out.print("Error occurred while INSERT Operation: " + e);
             return false;
@@ -305,9 +361,9 @@ public class BookDAO {
         //Declare a INSERT statement
         String updateStmt =
                         "INSERT INTO book\n" +
-                        "(Book_ID, NAME, ADDED_DATE, AGE, DESCRIPTION, WEIGHT, REST, PRICE, SALE_PRICE, TAGS, IMAGE)\n" +
+                        "(BOOK_ID, NAME, ADDED_DATE, AGE, DESCRIPTION, WEIGHT, REST, PRICE, SALE_PRICE, TAGS, IMAGE)\n" +
                         "VALUES\n" +
-                        "(book_id_seq.nextval, ?, SYSDATE, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        "(null, ?, date('now'), ?, ?, ?, ?, ?, ?, ?, ?)";
 
         FileInputStream fis = null;
         try {
@@ -319,7 +375,7 @@ public class BookDAO {
         //Execute UPDATE operation
         PreparedStatement ps = null;
         try {
-            Connection conn = DBUtil.dbGetConnection();
+            Connection conn = DBUtilSQLite.dbGetConnection();
             ps = conn.prepareStatement(updateStmt);
             ps.setString(1,name);
             ps.setString(2,age);
@@ -329,7 +385,9 @@ public class BookDAO {
             ps.setInt(6, Integer.parseInt(price));
             ps.setInt(7, Integer.parseInt(sale_price));
             ps.setString(8, tags);
-            ps.setBinaryStream(9, fis, file.length());
+           // set binary for ojdb
+            // ps.setBinaryStream(9, fis, file.length());
+            ps.setBytes(9, readFile(file));
             ps.executeUpdate();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -338,7 +396,7 @@ public class BookDAO {
             if (ps != null) {
                 ps.close();
             }
-            DBUtil.dbDisconnect();
+            DBUtilSQLite.dbDisconnect();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -346,11 +404,39 @@ public class BookDAO {
         return true;
     }
 
+    private static byte[] readFile(File f) {
+        ByteArrayOutputStream bos = null;
+        try {
+           // File f = new File(file);
+            FileInputStream fis = new FileInputStream(f);
+            byte[] buffer = new byte[1024];
+            bos = new ByteArrayOutputStream();
+            for (int len; (len = fis.read(buffer)) != -1;) {
+                bos.write(buffer, 0, len);
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println(e.getMessage());
+        } catch (IOException e2) {
+            System.err.println(e2.getMessage());
+        }
+        return bos != null ? bos.toByteArray() : null;
+    }
+
     public static Image getImageByName(String bookName) throws SQLException  {
-        try ( PreparedStatement ps = DBUtil.dbGetConnection().prepareStatement("SELECT image FROM book WHERE name = ?")){
+        try ( PreparedStatement ps = DBUtilSQLite.dbGetConnection().prepareStatement("SELECT image FROM book WHERE name = ?")){
             ps.setString(1, bookName);
             ResultSet rs = ps.executeQuery();
             Image img = null ;
+            InputStream in = null;
+            while (rs.next()){
+                in = rs.getBinaryStream("image");
+                if(in != null){
+                    img = new Image(in);
+                    in.close();
+                }
+            }
+
+            /*// for ojdb
             if (rs.next()) {
                 Blob blob = rs.getBlob("image");
                 if(blob != null){
@@ -360,7 +446,7 @@ public class BookDAO {
                 }else {
                     System.out.println("Warning: no image in table!");
                 }
-            }
+            }*/
             rs.close();
             return img ;
             } catch (Throwable e) {
@@ -372,10 +458,27 @@ public class BookDAO {
     public static void deleteBookImgByName(String name) throws ClassNotFoundException {
         String delStmt = "UPDATE book SET image=null WHERE name='" + name+"'";
         try {
-            DBUtil.dbExecuteUpdate(delStmt);
+            DBUtilSQLite.dbExecuteUpdate(delStmt);
             System.out.print("Book image was Deleted! ");
         } catch (SQLException e) {
             System.out.print("Error occurred while DELETE Image Operation: " + e);
         }
     }
+    public static Book getBookByID(String book_id) {
+
+        String selectStmt = "SELECT * From BOOK WHERE book_id = '" + book_id +"'";
+        Book book = null;
+        try {
+            ResultSet rsBook  = DBUtilSQLite.dbExecuteQuery(selectStmt);
+            book  = getBookFromResultSet(rsBook).get(0);
+        } catch (SQLException e) {
+            System.out.print("Error occurred while SELECT BOOK BY ID Operation: " + e);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return book;
+    }
+
+
+
 }

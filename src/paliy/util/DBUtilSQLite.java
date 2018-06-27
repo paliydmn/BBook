@@ -4,19 +4,11 @@ import com.sun.rowset.CachedRowSetImpl;
 
 import java.sql.*;
 
-
-public abstract class DBUtil {
-    //Declare JDBC Driver
+public class DBUtilSQLite{
     private static final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";
-
-    //Connection
     private static Connection conn = null;
 
-    //Connection String
-    //String connStr = "jdbc:oracle:thin:Username/Password@IP:Port/SID";
-    //Username=HR, Password=HR, IP=localhost, IP=1521, SID=xe
-    private static final String connStr = "jdbc:oracle:thin:HR/bookbambook@localhost:1521/xe";
-
+    private static final String connStr = "jdbc:sqlite:D:/Work/java/Bbook/db/bbook.db";
 
     //Connect to DB
     public static void dbConnect() throws SQLException, ClassNotFoundException {
@@ -34,14 +26,17 @@ public abstract class DBUtil {
         //Establish the Oracle Connection using Connection String
         try {
             conn = DriverManager.getConnection(connStr);
+            System.out.println("Connected to SQLite db!");
+
+
         } catch (SQLException e) {
-            System.out.println("Connection Failed! Check output console" + e);
+            System.out.println("Connection to SQLite DB is Failed! Check output console" + e);
             e.printStackTrace();
             throw e;
         }
     }
 
-  //Connect to DB
+    //Connect to DB
     public static Connection dbGetConnection() throws SQLException, ClassNotFoundException {
         //Setting Oracle JDBC Driver
         try {
@@ -140,4 +135,5 @@ public abstract class DBUtil {
             dbDisconnect();
         }
     }
+
 }

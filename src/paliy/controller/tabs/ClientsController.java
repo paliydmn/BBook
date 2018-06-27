@@ -25,6 +25,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ClientsController {
@@ -41,6 +42,7 @@ public class ClientsController {
     public Button btnArchivehClients;
     public Button btnDeleteClients;
     public Button btnEditClients;
+    public TreeView listOrdersClientsTab;
     private MainController main;
 
     @FXML
@@ -89,9 +91,10 @@ public class ClientsController {
 
         fillMainTabTable();
         refreshAutoComplet();
+
+        //for multi selections
+        tableClients.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         //Auto completed listener
-
-
         autoCompletionBinding.setOnAutoCompleted(autoCompleted -> {
             List<Clients> clientsList = ClientsDAO.getObsClientsList().stream()
                     .filter(item -> item.getClientFio().equals(autoCompleted.getCompletion()))
@@ -131,6 +134,35 @@ public class ClientsController {
             });
             return row ;
         });
+
+
+        ObservableList<String> data = FXCollections.observableArrayList();
+        data.addAll("Test1", "Test2", "Test3", "Test4", "Test1", "Test2", "Test3", "Test4", "Test1", "Test2", "Test3", "Test4");
+
+        ArrayList<TreeItem> cars = new ArrayList<TreeItem>();
+
+        TreeItem<String> ferrari = new TreeItem<String>("Ferrari");
+        TreeItem<String> ferrari2 = new TreeItem<String>("Ferrari");
+        TreeItem<String> ferrari3 = new TreeItem<String>("Ferrari");
+      /*  TreeItem porsche = new TreeItem("Porsche");
+        TreeItem ford = new TreeItem("Ford");
+        TreeItem mercedes = new TreeItem("Mercedes");*/
+
+        cars.add(ferrari);
+        cars.add(ferrari2);
+        cars.add(ferrari3);
+  /*      cars.add(porsche);
+        cars.add(ford);
+        cars.add(mercedes);*/
+
+        TreeItem<String> treeItem = new TreeItem<String>();
+        treeItem.setValue("Tree Item Value");
+        treeItem.setExpanded(true);
+        treeItem.getChildren().addAll(ferrari,ferrari2,ferrari3);
+
+        listOrdersClientsTab.setRoot(treeItem);
+        //listOrdersClientsTab
+
 
     }
 
@@ -172,6 +204,9 @@ public class ClientsController {
         tableClients.setItems(clientsData);
 
         // fill name list for quick search
+        if(fioList != null){
+            fioList.clear();
+        }
         for(Clients fio : clientsData){
             fioList.add(fio.getClientFio());
         }
@@ -221,6 +256,36 @@ public class ClientsController {
     }
 
     public void onRemoveClient(ActionEvent actionEvent) {
+        List<Clients> clients = tableClients.getSelectionModel().getSelectedItems();
+        List<String> cNameList = new ArrayList<>();
+        for(Clients client : clients){
+            cNameList.add(client.getClientFio());
+        }
+        String bNames = "";
+        String cont = "";
+        boolean isSelected = false;
+        if(clients.size() <= 0){
+            bNames = "Не обрано жодного клієнта!";
+            cont  = "Закрийте діалог та виберіть клієнта(ів) для видалення.";
+        }else {
+            isSelected = true;
+            bNames = cNameList.toString();
+            if(cNameList.size() > 1)
+                cont = "Клієнти будуть видалені із бази!";
+            else
+                cont = "Клієнт буде видалений із бази!";
+        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Видалення книги");
+        alert.setHeaderText(bNames);
+        alert.setContentText(cont);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK && isSelected){
+                ClientsDAO.deleteClientByName(cNameList);
+                fillMainTabTable();
+                main.updateStatus("Клієнт(и) " + bNames + " був(ли) видалені із бази!");
+        }
     }
 
     public void onEditClient(ActionEvent actionEvent) {
