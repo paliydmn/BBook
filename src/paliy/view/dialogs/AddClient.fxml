@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="423.0" minHeight="360.0" prefHeight="372.0" prefWidth="457.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paliy.controller.dialogs.AddClientController">
+        <children>
+            <Label layoutX="11.0" layoutY="64.0" text="Емейл:">
+                <VBox.margin>
+                    <Insets bottom="10.0" top="5.0" />
+                </VBox.margin>
+                <font>
+                    <Font name="Verdana" size="12.0" />
+                </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="184.0" text="Нотатки:">
+                <VBox.margin>
+                    <Insets bottom="10.0" />
+                </VBox.margin>
+                <font>
+                    <Font name="Verdana" size="12.0" />
+                </font>
+            </Label>
+            <Label layoutX="11.0" layoutY="153.0" text="Сайт:">
+                <VBox.margin>
+                    <Insets bottom="10.0" />
+                </VBox.margin>
+                <font>
+                    <Font name="Verdana" size="12.0" />
+                </font>
+            </Label>
+            <Label layoutX="11.0" layoutY="34.0" text="ФІО:">
+                <VBox.margin>
+                    <Insets bottom="10.0" />
+                </VBox.margin>
+                <font>
+                    <Font name="Verdana" size="12.0" />
+                </font>
+            </Label>
+            <Label layoutX="11.0" layoutY="124.0" text="Адреса:">
+                <VBox.margin>
+                    <Insets bottom="10.0" top="5.0" />
+                </VBox.margin>
+                <font>
+                    <Font name="Verdana" size="12.0" />
+                </font>
+            </Label>
+            <Label layoutX="11.0" layoutY="94.0" text="Тел:">
+                <VBox.margin>
+                    <Insets bottom="10.0" top="5.0" />
+                </VBox.margin>
+                <font>
+                    <Font name="Verdana" size="12.0" />
+                </font>
+            </Label>
+            <TextField fx:id="tfieldAddClientFio" layoutX="79.0" layoutY="30.0" prefHeight="25.0" prefWidth="352.0" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="26.0">
+                <VBox.margin>
+                    <Insets bottom="5.0" top="5.0" />
+                </VBox.margin>
+            </TextField>
+            <TextField fx:id="tfieldAddClientEmail" layoutX="79.0" layoutY="60.0" prefHeight="25.0" prefWidth="352.0" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="26.0">
+                <VBox.margin>
+                    <Insets bottom="5.0" />
+                </VBox.margin>
+            </TextField>
+            <TextField fx:id="tfieldAddClientTel" layoutX="79.0" layoutY="90.0" prefHeight="25.0" prefWidth="352.0" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="26.0">
+                <VBox.margin>
+                    <Insets bottom="5.0" />
+                </VBox.margin>
+            </TextField>
+            <TextField fx:id="tfieldAddClientAddr" layoutX="79.0" layoutY="120.0" prefHeight="25.0" prefWidth="352.0" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="26.0">
+                <VBox.margin>
+                    <Insets bottom="5.0" />
+                </VBox.margin>
+            </TextField>
+            <TextField fx:id="tfieldAddClientFrom" layoutX="79.0" layoutY="150.0" prefHeight="25.0" prefWidth="352.0" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="26.0">
+                <VBox.margin>
+                    <Insets bottom="5.0" />
+                </VBox.margin>
+            </TextField>
+            <TextArea fx:id="tfieldAddClientNotes" layoutX="79.0" layoutY="183.0" prefHeight="140.0" prefWidth="352.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="183.0" />
+            <Label layoutX="133.0" layoutY="6.0" prefHeight="18.0" prefWidth="78.0" text="Клієнт №">
+                <font>
+                    <Font name="Verdana" size="14.0" />
+                </font>
+            </Label>
+            <Label fx:id="lblAddClientNum" layoutX="211.0" layoutY="6.0" prefHeight="17.0" prefWidth="49.0" text="1" AnchorPane.leftAnchor="211.0" AnchorPane.rightAnchor="237.0">
+                <font>
+                    <Font name="Verdana" size="14.0" />
+                </font>
+            </Label>
+            <Label layoutX="332.0" layoutY="6.0" text="Додано " AnchorPane.rightAnchor="106.0">
+                <font>
+                    <Font name="Verdana" size="14.0" />
+                </font>
+            </Label>
+            <Label fx:id="lblAddClientDate" layoutX="406.0" layoutY="6.0" text="16.01.18" AnchorPane.rightAnchor="27.0">
+                <font>
+                    <Font name="Verdana" size="14.0" />
+                </font>
+            </Label>
+            <Button fx:id="btnAddClientOk" layoutX="416.0" layoutY="345.0" mnemonicParsing="false" onAction="#onAddClient" text="Додати" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="25.0" />
+            <Button fx:id="btnAddClientCancel" layoutX="316.0" layoutY="345.0" mnemonicParsing="false" onAction="#onCancel" text="Відмінити" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="111.0" />
+            <Label fx:id="lblWarning" layoutX="20.0" layoutY="339.0" prefHeight="17.0" prefWidth="224.0" text="Перевірте, чи корректно введені дані" textFill="#dd0d0d" visible="false">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Label>
+        </children>
+    </AnchorPane>
