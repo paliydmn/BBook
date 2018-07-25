@@ -2,8 +2,9 @@ package paliy.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import paliy.util.DBUtil;
+import paliy.util.DBUtilSQLite;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class ClientsDAO {
         //Execute SELECT statement
         try {
             //Get ResultSet from dbExecuteQuery method
-            ResultSet rsClients = DBUtil.dbExecuteQuery(selectStmt);
+            ResultSet rsClients = DBUtilSQLite.dbExecuteQuery(selectStmt);
             //Send ResultSet to the getBookFromResultSet method and get employee object
             return getClientsFromResultSet(rsClients);
         } catch (SQLException e) {
@@ -58,7 +59,8 @@ public class ClientsDAO {
         //Execute SELECT statement
         try {
             //Get ResultSet from dbExecuteQuery method
-            ResultSet rsClients = DBUtil.dbExecuteQuery(selectStmt);
+            //ResultSet rsClients = DBUtil.dbExecuteQuery(selectStmt);
+            ResultSet rsClients = DBUtilSQLite.dbExecuteQuery(selectStmt);
             //Send ResultSet to the getBookList method and get book object
             getClientsList(rsClients);
             //Return book object
@@ -89,7 +91,8 @@ public class ClientsDAO {
         ResultSet rsFio;
         try {
             //Get ResultSet from dbExecuteQuery method
-            rsFio = DBUtil.dbExecuteQuery(selectStmt);
+            //rsFio = DBUtil.dbExecuteQuery(selectStmt);
+            rsFio = DBUtilSQLite.dbExecuteQuery(selectStmt);
         } catch (SQLException e) {
             System.out.println("SQL select operation has been failed: " + e);
             //Return exception
@@ -117,7 +120,7 @@ public class ClientsDAO {
         client.setClientAddress(rs.getString("ADDRESS"));
         client.setClientFrom(rs.getString("COME_FROM"));
         client.setClientOrders(rs.getString("ORDERS"));
-        client.setAddedDate(rs.getDate("ADDED_DATE"));
+        client.setAddedDate(Date.valueOf(rs.getString("ADDED_DATE")));
         client.setClientNotes(rs.getString("NOTES"));
 
         return client;
@@ -128,22 +131,21 @@ public class ClientsDAO {
     //*************************************
     public static boolean insertClient(String fio, String email, String tel, String address, String from, String notes) throws SQLException, ClassNotFoundException {
         String updateStmt =
-                "BEGIN\n" +
                         "INSERT INTO clients\n" +
                         "(ID, FIO, EMAIL, TEL, ADDRESS, COME_FROM, ADDED_DATE, NOTES)\n" +
                         "VALUES\n" +
-                        "(clients_id_seq.nextval, '" + fio +
+                        "(null, '" + fio +
                         "','" + email +
                         "','" + tel +
                         "','" + address +
                         "','" + from +
-                        "'," + " SYSDATE,"+
+                        "'," + " date('now'), '"+
                         "'" + notes +
-                        "');\n" +
-                        "END;";
+                        "');";
 
         try {
-            DBUtil.dbExecuteUpdate(updateStmt);
+            //DBUtil.dbExecuteUpdate(updateStmt);
+            DBUtilSQLite.dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {
             System.out.print("Error occurred while Inserting Operation: " + e);
             return false;
@@ -158,7 +160,8 @@ public class ClientsDAO {
         String stmt = String.format("SELECT * FROM CLIENTS WHERE fio='%s'", fio);
         try {
             //Get ResultSet from dbExecuteQuery method
-            ResultSet rs = DBUtil.dbExecuteQuery(stmt);
+            //ResultSet rs = DBUtil.dbExecuteQuery(stmt);
+            ResultSet rs = DBUtilSQLite.dbExecuteQuery(stmt);
             //Send ResultSet to the getBookList method and get book object
             //in order to set the right cursor  position
             rs.next();
@@ -185,7 +188,8 @@ public class ClientsDAO {
                         "END;";
         //Execute UPDATE operation
         try {
-            DBUtil.dbExecuteUpdate(updateStmt);
+            //DBUtil.dbExecuteUpdate(updateStmt);
+            DBUtilSQLite.dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {
             System.out.print("Error occurred while DELETE Clients Operation: " + e);
         } catch (ClassNotFoundException e) {
