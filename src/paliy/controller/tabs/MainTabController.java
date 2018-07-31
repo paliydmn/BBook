@@ -44,7 +44,6 @@ public class MainTabController {
 
     @FXML
     public TableView<Book> tableMainBook;
-
     @FXML
     public TableColumn<Book, Date> bookAddedDateClmn;
     @FXML
@@ -164,6 +163,7 @@ public class MainTabController {
     public int latestBookId;
 
     ObservableList<Book> bookObservableList;
+    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 
     AutoCompletionBinding<String> autoCompletionBinding;
 
@@ -219,7 +219,6 @@ public class MainTabController {
         });
 
         //set current date for orders
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         lblMainOrderDate.setText(sdf.format(Calendar.getInstance().getTime()));
 
         // Autocompletion for FIO textField
@@ -253,6 +252,13 @@ public class MainTabController {
 
         dropDMainSendVia.setItems(FXCollections.observableList(Arrays.asList("НП","УкрП", "Доставка", "Самовивіз")));
         dropDMainSendVia.getSelectionModel().selectFirst();
+
+        Order o = OrderDAO.getLastOrder();
+        if(o != null){
+            lblMainOrderNumber.setText(String.valueOf(o.getId() +1));
+        }else {
+            lblMainOrderNumber.setText("1");
+        }
 
         // disabled if no items in order list
         btnMainCreateOrder.setDisable(true);
@@ -798,15 +804,29 @@ public class MainTabController {
 
     public void onCommitOrder() throws SQLException, ClassNotFoundException {
 
+        Order order = new Order();
+        order.setId(Integer.parseInt(lblMainOrderNumber.getText()));
+
+        String ordBooks = "";
+
         for(TmpOrder item : orderData){
            int quantity =  BookDAO.getBookByID(String.valueOf(item.getBookId())).getRest() - item.getQuantity();
             BookDAO.updateBookRest(String.valueOf(item.getBookId()), String.valueOf(quantity));
+           ordBooks += (item.getBook_name() + ", ");
         }
+        order.setBooks(ordBooks);
+        order.setClient_name(txtFieadMainClientFIO.getText());
+        order.setOrdered_via(dropDMainOrderedFrom.getSelectionModel().getSelectedItem().toString());
+        order.setSend_via(dropDMainSendVia.getSelectionModel().getSelectedItem().toString());
+        order.setPrice(Integer.parseInt(lblMainOrderedPrice.getText()));
+        //order.setDate(Date.valueOf(lblMainOrderDate.getText()));
 
+        OrderDAO.insertOrder(order);
         orderData.clear();
         orderNum = 1;
         updateTmpOrderWeight(orderData);
         updateTmpOrderPrice(orderData);
+
         clearClientFields();
 
     }

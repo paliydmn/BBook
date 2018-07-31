@@ -95,7 +95,7 @@ public class ClientsController {
         //for multi selections
         tableClients.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         //Auto completed listener
-        autoCompletionBinding.setOnAutoCompleted(autoCompleted -> {
+               autoCompletionBinding.setOnAutoCompleted(autoCompleted -> {
             List<Clients> clientsList = ClientsDAO.getObsClientsList().stream()
                     .filter(item -> item.getClientFio().equals(autoCompleted.getCompletion()))
                     .collect(Collectors.toList());
@@ -111,8 +111,8 @@ public class ClientsController {
         });
 
         btnSearchClients.setOnKeyPressed(event -> {
-           if(event.getCode() == KeyCode.ENTER )
-               onSearch();
+            if(event.getCode() == KeyCode.ENTER )
+                onSearch();
         });
 
         btnSearchClients.setOnMouseClicked(event -> {
@@ -233,7 +233,7 @@ public class ClientsController {
         try{
             Stage stage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("/paliy/view/dialogs/AddClient.fxml"));
-            stage.setTitle("Додати нову книгу в базу");
+            stage.setTitle("Додати нового клієнта в базу");
             stage.setMinHeight(190);
             stage.setMinWidth(255);
             //stage.setResizable(false);

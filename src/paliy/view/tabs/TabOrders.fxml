@@ -14,12 +14,12 @@
                     <children>
                         <HBox prefHeight="25.0" prefWidth="750.0">
                             <children>
-                                <TextField prefHeight="25.0" prefWidth="389.0">
+                                <TextField fx:id="txtFieldSearchOrder" onAction="#onSearch" prefHeight="25.0" prefWidth="389.0">
                                     <HBox.margin>
                                         <Insets left="10.0" right="10.0" />
                                     </HBox.margin>
                                 </TextField>
-                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Знайти">
+                                <Button fx:id="btnSearchOrder" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Знайти">
                                     <HBox.margin>
                                         <Insets left="10.0" right="10.0" />
                                     </HBox.margin>
@@ -28,16 +28,16 @@
                         </HBox>
                         <AnchorPane prefHeight="254.0" prefWidth="750.0" VBox.vgrow="ALWAYS">
                             <children>
-                                <TableView prefHeight="200.0" prefWidth="750.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <TableView fx:id="tableOrders" prefHeight="200.0" prefWidth="750.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <columns>
-                                        <TableColumn prefWidth="28.0" text="№" />
-                                        <TableColumn prefWidth="145.0" text="Назва книги" />
-                                        <TableColumn prefWidth="89.0" text="Теги" />
-                                        <TableColumn prefWidth="67.0" text="Отримано" />
-                                        <TableColumn prefWidth="64.0" text="Залишок" />
-                                        <TableColumn prefWidth="86.0" text="Ціна видавн." />
-                                        <TableColumn prefWidth="78.0" text="Ціна продажу" />
-                                        <TableColumn prefWidth="186.0" text="Опис" />
+                                        <TableColumn fx:id="orderIdClmn" prefWidth="28.0" text="№" />
+                                        <TableColumn fx:id="clientNameClmn" prefWidth="125.0" text="Замовив" />
+                                        <TableColumn fx:id="bookClmn" prefWidth="120.0" text="Книга" />
+                                        <TableColumn fx:id="orderViaClmn" prefWidth="85.0" text="Замов.Через" />
+                                        <TableColumn fx:id="sendViaClmn" prefWidth="100.0" text="Відправ. Через" />
+                                        <TableColumn fx:id="priceClmn" prefWidth="74.0" text="Вартість" />
+                                        <TableColumn fx:id="statusClmn" prefWidth="91.0" text="Статус" />
+                                        <TableColumn fx:id="dateClmn" prefWidth="120.0" text="Дата" />
                                     </columns>
                                 </TableView>
                             </children>

@@ -84,6 +84,9 @@ public class MainController {
                        if(t1.getText().equals("Клієнти")){
                            clientsController.init(initObject);
                        }
+                         if(t1.getText().equals("Замовлення")){
+                           ordersController.init(initObject);
+                       }
                     }
                 }
         );
