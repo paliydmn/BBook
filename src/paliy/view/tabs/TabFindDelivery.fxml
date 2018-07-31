@@ -34,12 +34,12 @@
             </AnchorPane>
             <AnchorPane>
                <children>
-                         <Button layoutX="294.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Знайти" AnchorPane.rightAnchor="10.0">
+                         <Button fx:id="btnSearch" layoutX="294.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Знайти" AnchorPane.rightAnchor="10.0">
                              <HBox.margin>
                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                              </HBox.margin>
                          </Button>
-                         <TextField layoutX="11.0" layoutY="10.0" prefHeight="25.0" prefWidth="270.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="120.0">
+                         <TextField fx:id="txtFieldSearch" layoutX="11.0" layoutY="10.0" onAction="#onSearch" prefHeight="25.0" prefWidth="270.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="120.0">
                              <HBox.margin>
                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                              </HBox.margin>

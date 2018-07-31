@@ -51,7 +51,7 @@ public class MainController {
             lbl_status.setStyle("-fx-font: 16 arial;");
         }
 
-        findDeliveryController.init(this);
+        //findDeliveryController.init(this);
         ordersController.init(this);
         booksController.init(this);
         //clientsController.init(this);
@@ -72,21 +72,24 @@ public class MainController {
                 new ChangeListener<Tab>() {
                     @Override
                     public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
-                       if(t1.getText().equals("Головна")){
-                           mainTabController.init(initObject);
+                           if(t1.getText().equals("Головна")){
+                               mainTabController.init(initObject);
 
-                           mainTabController.fillMainTabTable();
-                           mainTabController.updateAllBooksCount();
-                           mainTabController.updateUniqueBookCount();
-                           mainTabController.updateSellPrice();
-                           mainTabController.updateOrderedPrice();
-                       }
-                       if(t1.getText().equals("Клієнти")){
-                           clientsController.init(initObject);
-                       }
-                         if(t1.getText().equals("Замовлення")){
-                           ordersController.init(initObject);
-                       }
+                               mainTabController.fillMainTabTable();
+                               mainTabController.updateAllBooksCount();
+                               mainTabController.updateUniqueBookCount();
+                               mainTabController.updateSellPrice();
+                               mainTabController.updateOrderedPrice();
+                           }
+                           if(t1.getText().equals("Клієнти")){
+                               clientsController.init(initObject);
+                           }
+                           if(t1.getText().equals("Замовлення")){
+                               ordersController.init(initObject);
+                           }
+                           if(t1.getText().equals("Відслідкувати")){
+                               findDeliveryController.init(initObject);
+                           }
                     }
                 }
         );

@@ -2,6 +2,10 @@ package paliy.controller.tabs;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
@@ -9,15 +13,40 @@ import paliy.controller.MainController;
 
 public class FindDeliveryController {
     public WebView deliveryTabWView;
+    public TextField txtFieldSearch;
+    public Button btnSearch;
     private MainController main;
+
+    WViewHelper webHelper;
 
     public void init(MainController mainController) {
         System.out.println("tabFindDelivery");
         main = mainController;
         System.out.println(main.getClass().getCanonicalName());
 
-        new WViewHelper().loadUrl("https://novaposhta.ua/tracking");
+        webHelper = new WViewHelper();
+        webHelper.loadUrl("https://novaposhta.ua/tracking");
 
+        btnSearch.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER )
+                onSearch();
+        });
+
+        btnSearch.setOnMouseClicked(event -> {
+            if(event.getButton() == MouseButton.PRIMARY)
+                onSearch();
+        });
+
+
+    }
+
+    public void onSearch() {
+
+        String link = "https://novaposhta.ua/tracking/?cargo_number=%s&phone=";
+        if(!txtFieldSearch.getText().equals("")){
+            webHelper.loadUrl(String.format(link,txtFieldSearch.getText()));
+
+        }
     }
 
     class WViewHelper {
