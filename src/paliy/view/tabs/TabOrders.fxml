@@ -36,8 +36,9 @@
                                         <TableColumn fx:id="orderViaClmn" prefWidth="85.0" text="Замов.Через" />
                                         <TableColumn fx:id="sendViaClmn" prefWidth="100.0" text="Відправ. Через" />
                                         <TableColumn fx:id="priceClmn" prefWidth="74.0" text="Вартість" />
-                                        <TableColumn fx:id="statusClmn" prefWidth="91.0" text="Статус" />
+                              <TableColumn fx:id="invoiceClmn" prefWidth="120.0" text="Накладна" />
                                         <TableColumn fx:id="dateClmn" prefWidth="120.0" text="Дата" />
+                                        <TableColumn fx:id="statusClmn" prefWidth="91.0" text="Статус" />
                                     </columns>
                                 </TableView>
                             </children>

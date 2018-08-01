@@ -7,6 +7,8 @@ import paliy.util.DBUtilSQLite;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderDAO {
     static ObservableList<Order> obsOrdersList;
@@ -97,6 +99,7 @@ public class OrderDAO {
         order.setOrdered_via(rs.getString("ORDER_FROM"));
         order.setSend_via(rs.getString("SEND_VIA"));
         order.setPrice(rs.getInt("PRICE"));
+        order.setInvoice(rs.getString("INVOICE"));
         order.setDate(Date.valueOf(rs.getString("DATE")));
         order.setStatus(rs.getString("STATUS"));
 
@@ -109,7 +112,7 @@ public class OrderDAO {
     public static boolean insertOrder(Order order) throws SQLException, ClassNotFoundException {
         String updateStmt =
                 "INSERT INTO orders\n" +
-                        "(ID, CLIENT, BOOKS, ORDER_FROM, SEND_VIA, PRICE, DATE, STATUS )\n" +
+                        "(ID, CLIENT, BOOKS, ORDER_FROM, SEND_VIA, PRICE, INVOICE, DATE, STATUS )\n" +
                         "VALUES\n" +
                         "('" + order.getId() +
                         "','" + order.getClient_name() +
@@ -117,6 +120,7 @@ public class OrderDAO {
                         "','" + order.getOrdered_via() +
                         "','" + order.getSend_via() +
                         "','" + order.getPrice() +
+                        "','" + order.getInvoice() +
                         "'," +  " date('now')" +
                         "," + null + ")";
 
@@ -127,5 +131,22 @@ public class OrderDAO {
             return false;
         }
         return true;
+    }
+
+    public static List<String> getInvoices() {
+        List<String> invoices = new ArrayList<>();
+        String stmt = "SELECT invoice FROM orders WHERE invoice IS NOT NULL AND invoice != ''";
+        try {
+            ResultSet rs = DBUtilSQLite.dbExecuteQuery(stmt);
+            while (rs.next()){
+                invoices.add(rs.getString("INVOICE"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return invoices;
     }
 }

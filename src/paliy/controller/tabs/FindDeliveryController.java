@@ -1,20 +1,26 @@
 package paliy.controller.tabs;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 import javafx.scene.web.WebView;
 import paliy.controller.MainController;
+import paliy.model.OrderDAO;
 
 public class FindDeliveryController {
     public WebView deliveryTabWView;
     public TextField txtFieldSearch;
     public Button btnSearch;
+    public ListView listViewInvoices;
     private MainController main;
 
     WViewHelper webHelper;
@@ -37,7 +43,20 @@ public class FindDeliveryController {
                 onSearch();
         });
 
+        ObservableList<String> data = FXCollections.observableArrayList();
+        data.addAll(OrderDAO.getInvoices());
 
+        listViewInvoices.setItems(data);
+        listViewInvoices.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                if(event.getClickCount() == 2){
+                    txtFieldSearch.setText(listViewInvoices.getSelectionModel().getSelectedItem().toString());
+                    onSearch();
+                }
+            }
+        });
     }
 
     public void onSearch() {

@@ -102,7 +102,7 @@ public class ClientsController {
             tableClients.setItems(FXCollections.observableList(clientsList));
 
             /* if(client != null){
-                txtFieadMainClientFIO.setText(client.getClientFio());
+                txtFieldMainClientFIO.setText(client.getClientFio());
                 txtFieadMainClientAddress.setText(client.getClientAddress());
                 txtFieadMainClientTel.setText(client.getClientTel());
             }

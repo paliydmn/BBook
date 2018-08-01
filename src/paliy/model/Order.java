@@ -12,6 +12,7 @@ public class Order {
     private StringProperty send_via;
     private IntegerProperty price;
     private StringProperty status;
+    private StringProperty invoice;
     private SimpleObjectProperty<Date> date;
 
 
@@ -23,6 +24,7 @@ public class Order {
         this.send_via =  new SimpleStringProperty();
         this.price = new SimpleIntegerProperty();
         this.status =  new SimpleStringProperty();
+        this.invoice =  new SimpleStringProperty();
         this.date = new SimpleObjectProperty<>();
     }
 
@@ -109,6 +111,12 @@ public class Order {
     public void setStatus(String status) {
         this.status.set(status);
     }
+
+    public String getInvoice() {return invoice.get();}
+
+    public StringProperty invoiceProperty() {return invoice;}
+
+    public void setInvoice(String invoice) {this.invoice.set(invoice);}
 
     public Date getDate() {
         return date.get();

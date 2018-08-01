@@ -139,7 +139,7 @@ public class ClientsDAO {
                         "','" + tel +
                         "','" + address +
                         "','" + from +
-                        "'," + " date('now'), '"+
+                        "'," + " date('now'),"+
                         "'" + notes +
                         "');";
 

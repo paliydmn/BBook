@@ -39,6 +39,8 @@ public class OrdersController {
     @FXML
     public TableColumn<Order, String>  statusClmn;
     @FXML
+    public TableColumn<Order, String> invoiceClmn;
+    @FXML
     public TableColumn<Order, Date>  dateClmn;
     public TextField txtFieldSearchOrder;
     public Button btnSearchOrder;
@@ -62,6 +64,7 @@ public class OrdersController {
         sendViaClmn.setCellValueFactory(cellData -> cellData.getValue().send_viaProperty());
         priceClmn.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
         statusClmn.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
+        invoiceClmn.setCellValueFactory(cellData -> cellData.getValue().invoiceProperty());
         dateClmn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
 
         fillMainTabTable();

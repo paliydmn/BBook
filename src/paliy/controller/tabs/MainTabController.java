@@ -24,6 +24,7 @@ import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 import paliy.EditCell;
 import paliy.MyIntegerStringConverter;
+import paliy.Toast;
 import paliy.controller.MainController;
 import paliy.controller.dialogs.AddBookController;
 import paliy.model.*;
@@ -126,7 +127,7 @@ public class MainTabController {
     @FXML
     public Label lblMainOrderNumber;
     @FXML
-    public TextField txtFieadMainClientFIO;
+    public TextField txtFieldMainClientFIO;
     @FXML
     public TextField txtFieadMainClientAddress;
     @FXML
@@ -166,6 +167,7 @@ public class MainTabController {
     SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 
     AutoCompletionBinding<String> autoCompletionBinding;
+    private boolean isNewClient = true;
 
     public void init(MainController mainController) {
         System.out.println("tabMain");
@@ -227,9 +229,10 @@ public class MainTabController {
         autoCompletionBinding.setOnAutoCompleted(autoCompleted -> {
             Clients client = ClientsDAO.getClientByFio(autoCompleted.getCompletion());
             if(client != null){
-                txtFieadMainClientFIO.setText(client.getClientFio());
+                txtFieldMainClientFIO.setText(client.getClientFio());
                 txtFieadMainClientAddress.setText(client.getClientAddress());
                 txtFieadMainClientTel.setText(client.getClientTel());
+                isNewClient = false;
             }
             lblMainOrderDate.setText(sdf.format(Calendar.getInstance().getTime()));
             System.out.println(autoCompleted.getCompletion());
@@ -307,7 +310,7 @@ public class MainTabController {
             autoCompletionBinding.dispose();
         }
         try {
-            autoCompletionBinding = TextFields.bindAutoCompletion(txtFieadMainClientFIO, ClientsDAO.getClientsFioList());
+            autoCompletionBinding = TextFields.bindAutoCompletion(txtFieldMainClientFIO, ClientsDAO.getClientsFioList());
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -801,40 +804,57 @@ public class MainTabController {
     public void onBookEdit(ActionEvent actionEvent) {
     }
 
+    public void notify(String notification){
+        int toastMsgTime = 1250; //3.5 seconds
+        int fadeInTime = 250; //0.5 seconds
+        int fadeOutTime= 250; //0.5 seconds
+        Toast.makeText((Stage) this.main.mainTabPane.getScene().getWindow(), notification, toastMsgTime, fadeInTime, fadeOutTime);
+    }
 
     public void onCommitOrder() throws SQLException, ClassNotFoundException {
 
-        Order order = new Order();
-        order.setId(Integer.parseInt(lblMainOrderNumber.getText()));
+        if(txtFieldMainClientFIO.getText().length() <= 3 ){
+            notify("Будь ласка введіть корректне імя покупця!");
+        }else {
 
-        String ordBooks = "";
+            Order order = new Order();
+            order.setId(Integer.parseInt(lblMainOrderNumber.getText()));
+            lblMainOrderNumber.setText(String.valueOf(Integer.parseInt(lblMainOrderNumber.getText()) + 1));
 
-        for(TmpOrder item : orderData){
-           int quantity =  BookDAO.getBookByID(String.valueOf(item.getBookId())).getRest() - item.getQuantity();
-            BookDAO.updateBookRest(String.valueOf(item.getBookId()), String.valueOf(quantity));
-           ordBooks += (item.getBook_name() + ", ");
+            String ordBooks = "";
+
+            for(TmpOrder item : orderData){
+                int quantity =  BookDAO.getBookByID(String.valueOf(item.getBookId())).getRest() - item.getQuantity();
+                BookDAO.updateBookRest(String.valueOf(item.getBookId()), String.valueOf(quantity));
+               ordBooks += (item.getBook_name() + ", ");
+            }
+            order.setBooks(ordBooks);
+            order.setClient_name(txtFieldMainClientFIO.getText());
+            order.setOrdered_via(dropDMainOrderedFrom.getSelectionModel().getSelectedItem().toString());
+            order.setSend_via(dropDMainSendVia.getSelectionModel().getSelectedItem().toString());
+            order.setPrice(Integer.parseInt(lblMainOrderedPrice.getText()));
+            order.setInvoice("");
+            //order.setDate(Date.valueOf(lblMainOrderDate.getText()));
+
+            OrderDAO.insertOrder(order);
+            orderData.clear();
+            orderNum = 1;
+            updateTmpOrderWeight(orderData);
+            updateTmpOrderPrice(orderData);
+
+            if(isNewClient){
+                ClientsDAO.insertClient(txtFieldMainClientFIO.getText(), "",txtFieadMainClientTel.getText(),txtFieadMainClientAddress.getText(), (String) dropDMainOrderedFrom.getSelectionModel().getSelectedItem(),"" );
+            }
+            isNewClient = true;
+            clearClientFields();
         }
-        order.setBooks(ordBooks);
-        order.setClient_name(txtFieadMainClientFIO.getText());
-        order.setOrdered_via(dropDMainOrderedFrom.getSelectionModel().getSelectedItem().toString());
-        order.setSend_via(dropDMainSendVia.getSelectionModel().getSelectedItem().toString());
-        order.setPrice(Integer.parseInt(lblMainOrderedPrice.getText()));
-        //order.setDate(Date.valueOf(lblMainOrderDate.getText()));
-
-        OrderDAO.insertOrder(order);
-        orderData.clear();
-        orderNum = 1;
-        updateTmpOrderWeight(orderData);
-        updateTmpOrderPrice(orderData);
-
-        clearClientFields();
 
     }
 
     private void clearClientFields() {
         txtFieadMainClientTel.clear();
         txtFieadMainClientAddress.clear();
-        txtFieadMainClientFIO.clear();
+        txtFieldMainClientFIO.clear();
     }
 }
 

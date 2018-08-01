@@ -249,7 +249,7 @@
                                                           <Insets bottom="5.0" left="5.0" top="7.0" />
                                                       </HBox.margin>
                                                   </Label>
-                                                  <TextField fx:id="txtFieadMainClientFIO" layoutX="179.0" layoutY="5.0" onAction="#onFioEnter" prefHeight="25.0" prefWidth="196.0" AnchorPane.leftAnchor="179.0">
+                                                  <TextField fx:id="txtFieldMainClientFIO" layoutX="179.0" layoutY="5.0" onAction="#onFioEnter" prefHeight="25.0" prefWidth="196.0" AnchorPane.leftAnchor="179.0">
                                                       <HBox.margin>
                                                           <Insets bottom="5.0" right="5.0" top="5.0" />
                                                       </HBox.margin>

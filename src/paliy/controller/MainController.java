@@ -51,7 +51,9 @@ public class MainController {
             lbl_status.setStyle("-fx-font: 16 arial;");
         }
 
+        //moved to tab listener
         //findDeliveryController.init(this);
+
         ordersController.init(this);
         booksController.init(this);
         //clientsController.init(this);
