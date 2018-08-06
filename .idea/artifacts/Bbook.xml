@@ -1,0 +1,28 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="Bbook">
+    <output-path>$PROJECT_DIR$/out/artifacts/Bbook</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="paliy.Main" />
+        <option name="description" value="" />
+        <option name="height" value="800" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="nativeBundle" value="all" />
+        <option name="title" value="Book Bambook" />
+        <option name="vendor" value="paliydmn@gmail.com" />
+        <option name="version" value="" />
+        <option name="width" value="1000" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="Bbook.jar">
+        <element id="module-output" name="Bbook" />
+      </element>
+      <element id="file-copy" path="D:/Libraries/controlsfx-8.40.14/controlsfx-8.40.14.jar" />
+      <element id="file-copy" path="D:/Libraries/controlsfx-8.40.14/controlsfx-samples-8.40.14.jar" />
+      <element id="file-copy" path="D:/Libraries/controlsfx-8.40.14/fxsampler-1.0.10.jar" />
+      <element id="file-copy" path="D:/Libraries/ojdbc/ojdbc6-11.2.0.4.0-atlassian-hosted.jar" />
+      <element id="file-copy" path="D:/Libraries/jdbssqlite/sqlite-jdbc-3.21.0.jar" />
+    </root>
+  </artifact>
+</component>

@@ -291,7 +291,7 @@
                                                           <Insets bottom="5.0" right="10.0" top="5.0" />
                                                       </HBox.margin>
                                                   </ChoiceBox>
-                                                  <Label fx:id="lbaMainParcelPrice" layoutX="558.0" layoutY="12.0" text="500грн">
+                                                  <Label fx:id="lbaMainParcelPrice" layoutX="558.0" layoutY="12.0" text="">
                                                       <font>
                                                           <Font size="18.0" />
                                                       </font>
@@ -331,7 +331,7 @@
                                                            <Insets top="8.0" />
                                                        </HBox.margin>
                                                    </Button>
-                                                  <Label fx:id="lbaMainParcelWeight" layoutX="382.0" layoutY="12.0" text="1530г">
+                                                  <Label fx:id="lbaMainParcelWeight" layoutX="382.0" layoutY="12.0" text="">
                                                       <font>
                                                           <Font size="18.0" />
                                                       </font>
