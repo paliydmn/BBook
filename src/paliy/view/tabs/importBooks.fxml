@@ -7,15 +7,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paliy.controller.tabs.ImportBooks">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paliy.controller.tabs.ImportBooksController">
    <children>
       <Label layoutX="14.0" layoutY="20.0" text="Імпортувати книги із файлу Excel" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="20.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtFieldSearch" layoutX="15.0" layoutY="48.0" onAction="#onSearch" prefHeight="25.0" prefWidth="225.0" promptText="Виберіть файл для імпорту книг" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="48.0" />
-      <Button fx:id="btnSearch" layoutX="245.0" layoutY="48.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="22.0" text="..." AnchorPane.topAnchor="48.0" />
+      <TextField fx:id="txtFieldChooseFile" layoutX="15.0" layoutY="48.0" prefHeight="25.0" prefWidth="225.0" promptText="Виберіть файл для імпорту книг" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="48.0" />
+      <Button fx:id="btnChooseFile" layoutX="245.0" layoutY="48.0" mnemonicParsing="false" onAction="#onChooseFile" prefHeight="25.0" prefWidth="22.0" text="..." AnchorPane.topAnchor="48.0" />
       <Label layoutX="15.0" layoutY="83.0" text="Вкажіть заголовки(title) по яким буде відбуватись імпорт в таблицю" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="83.0">
          <font>
             <Font size="14.0" />
@@ -25,7 +25,7 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="227.0">
                <children>
-                  <TextField fx:id="txtFieldSearch1" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="95.0" promptText="№" />
+                  <TextField fx:id="txtFieldIdLable" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="95.0" promptText="№" />
                   <Label layoutX="131.0" layoutY="40.0" prefHeight="20.0" prefWidth="55.0" text="№">
                      <font>
                         <Font size="14.0" />
@@ -36,8 +36,8 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtFieldSearch11" layoutX="14.0" layoutY="68.0" prefHeight="25.0" prefWidth="95.0" promptText="Назва книги" />
-                  <TextField fx:id="txtFieldSearch111" layoutX="14.0" layoutY="159.0" prefHeight="25.0" prefWidth="95.0" promptText="Залишок" />
+                  <TextField fx:id="txtFieldNameLable" layoutX="14.0" layoutY="68.0" prefHeight="25.0" prefWidth="95.0" promptText="Назва книги" />
+                  <TextField fx:id="txtFieldRestLable" layoutX="14.0" layoutY="159.0" prefHeight="25.0" prefWidth="95.0" promptText="Залишок" />
                   <Label layoutX="131.0" layoutY="162.0" prefHeight="20.0" prefWidth="84.0" text="Залишок">
                      <font>
                         <Font size="14.0" />
@@ -48,7 +48,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtFieldSearch12" layoutX="14.0" layoutY="97.0" prefHeight="25.0" prefWidth="95.0" promptText="Вік" />
+                  <TextField fx:id="txtFieldAgeLable" layoutX="14.0" layoutY="97.0" prefHeight="25.0" prefWidth="95.0" promptText="Вік" />
                   <Label layoutX="114.0" layoutY="40.0" prefHeight="20.0" prefWidth="18.0" text="-&gt;">
                      <font>
                         <Font size="14.0" />
@@ -79,7 +79,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtFieldSearch121" layoutX="14.0" layoutY="188.0" prefHeight="25.0" prefWidth="95.0" promptText="Вага" />
+                  <TextField fx:id="txtFieldWeightLable" layoutX="14.0" layoutY="188.0" prefHeight="25.0" prefWidth="95.0" promptText="Вага" />
                   <Label layoutX="131.0" layoutY="191.0" prefHeight="20.0" prefWidth="80.0" text="Вага">
                      <font>
                         <Font size="14.0" />
@@ -90,7 +90,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtFieldSearch1111" layoutX="14.0" layoutY="219.0" prefHeight="25.0" prefWidth="95.0" promptText="Опис" />
+                  <TextField fx:id="txtFieldDescriptionLable" layoutX="14.0" layoutY="219.0" prefHeight="25.0" prefWidth="95.0" promptText="Опис" />
                   <Label layoutX="114.0" layoutY="132.0" prefHeight="20.0" prefWidth="18.0" text="-&gt;">
                      <font>
                         <Font size="14.0" />
@@ -101,7 +101,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtFieldSearch1112" layoutX="14.0" layoutY="129.0" prefHeight="25.0" prefWidth="95.0" promptText="Ціна видавн." />
+                  <TextField fx:id="txtFieldPriceLable" layoutX="14.0" layoutY="129.0" prefHeight="25.0" prefWidth="95.0" promptText="Ціна видавн." />
                   <Label layoutX="34.0" layoutY="13.0" prefHeight="20.0" prefWidth="55.0" text="В файлі">
                      <font>
                         <Font size="14.0" />
@@ -117,19 +117,19 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <TableView layoutX="268.0" layoutY="111.0" prefHeight="400.0" prefWidth="518.0" AnchorPane.bottomAnchor="89.0" AnchorPane.leftAnchor="268.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="111.0">
+      <TableView fx:id="tblImportBooks" layoutX="268.0" layoutY="111.0" prefHeight="400.0" prefWidth="518.0" AnchorPane.bottomAnchor="89.0" AnchorPane.leftAnchor="268.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="111.0">
         <columns>
-          <TableColumn prefWidth="32.0" text="№" />
-          <TableColumn prefWidth="122.0" text="Назва книги" />
-            <TableColumn prefWidth="68.0" text="Вік" />
-            <TableColumn prefWidth="79.0" text="Ціна видавн." />
-            <TableColumn minWidth="6.0" text="Залишок" />
-            <TableColumn prefWidth="50.0" text="Вага" />
-            <TableColumn prefWidth="82.0" text="Опис" />
+          <TableColumn fx:id="idClmn" prefWidth="32.0" text="№" />
+          <TableColumn fx:id="bookNameClmn" prefWidth="122.0" text="Назва книги" />
+            <TableColumn fx:id="ageClmn" prefWidth="68.0" text="Вік" />
+            <TableColumn fx:id="priceClmn" prefWidth="79.0" text="Ціна видавн." />
+            <TableColumn fx:id="restClmn" minWidth="6.0" text="Залишок" />
+            <TableColumn fx:id="weightClmn" prefWidth="50.0" text="Вага" />
+            <TableColumn fx:id="descriptionClmn" prefWidth="82.0" text="Опис" />
         </columns>
       </TableView>
-      <Button fx:id="btnSearch2" layoutX="20.0" layoutY="398.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Імпортувати" AnchorPane.bottomAnchor="177.0" AnchorPane.leftAnchor="20.0" />
-      <Button fx:id="btnSearch21" layoutX="130.0" layoutY="398.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Очистити" AnchorPane.bottomAnchor="177.0" AnchorPane.leftAnchor="130.0" />
-      <Button fx:id="btnSearch211" layoutX="576.0" layoutY="328.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Застосувати" AnchorPane.bottomAnchor="47.0" AnchorPane.rightAnchor="19.0" />
+      <Button layoutX="20.0" layoutY="398.0" mnemonicParsing="false" onAction="#onImport" prefHeight="25.0" prefWidth="95.0" text="Імпортувати" AnchorPane.bottomAnchor="177.0" AnchorPane.leftAnchor="20.0" />
+      <Button layoutX="130.0" layoutY="398.0" mnemonicParsing="false" onAction="#onClearData" prefHeight="25.0" prefWidth="95.0" text="Очистити" AnchorPane.bottomAnchor="177.0" AnchorPane.leftAnchor="130.0" />
+      <Button layoutX="576.0" layoutY="328.0" mnemonicParsing="false" onAction="#onImportApply" prefHeight="25.0" prefWidth="95.0" text="Застосувати" AnchorPane.bottomAnchor="47.0" AnchorPane.rightAnchor="19.0" />
    </children>
 </AnchorPane>

@@ -27,6 +27,8 @@ public class MainController {
     private BooksController booksController;
     @FXML
     private ClientsController clientsController;
+    @FXML
+    private ImportBooksController importBooksController;
 
     @FXML
     public void initialize(){
@@ -91,6 +93,9 @@ public class MainController {
                            }
                            if(t1.getText().equals("Відслідкувати")){
                                findDeliveryController.init(initObject);
+                           }
+                         if(t1.getText().equals("Імпорт книг")){
+                             importBooksController.init(initObject);
                            }
                     }
                 }
