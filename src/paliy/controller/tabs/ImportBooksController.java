@@ -3,12 +3,11 @@ package paliy.controller.tabs;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
 import paliy.controller.MainController;
 import paliy.model.TmpImportBooks;
 import paliy.util.TableUtils;
@@ -31,31 +30,51 @@ public class ImportBooksController {
     public TextField txtFieldPriceLable;
 
     public TableView<TmpImportBooks> tblImportBooks;
-    public TableColumn idClmn;
-    public TableColumn bookNameClmn;
-    public TableColumn ageClmn;
-    public TableColumn priceClmn;
-    public TableColumn restClmn;
-    public TableColumn weightClmn;
-    public TableColumn descriptionClmn;
-
+    public TableColumn<TmpImportBooks, Integer> idClmn;
+    public TableColumn<TmpImportBooks, String> bookNameClmn;
+    public TableColumn<TmpImportBooks, Integer> ageClmn;
+    public TableColumn<TmpImportBooks, String> priceClmn;
+    public TableColumn<TmpImportBooks, String> restClmn;
+    public TableColumn<TmpImportBooks, String> weightClmn;
+    public TableColumn<TmpImportBooks, String> descriptionClmn;
 
 
     public void init(MainController mainController) {
+
+      /*  idClmn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
+        bookNameClmn.setCellValueFactory(cellData -> cellData.getValue().bookNameProperty());
+        ageClmn.setCellValueFactory(cellData -> cellData.getValue().ageProperty());
+        priceClmn.setCellValueFactory(cellData -> cellData.getValue().priceProperty());
+        restClmn.setCellValueFactory(cellData -> cellData.getValue().restProperty());
+        weightClmn.setCellValueFactory(cellData -> cellData.getValue().weightProperty());
+        descriptionClmn.setCellValueFactory(cellData -> cellData.getValue().bookNameProperty());
+*/
+        idClmn.setCellValueFactory(new PropertyValueFactory<TmpImportBooks, Integer>("id"));
+        bookNameClmn.setCellValueFactory(new PropertyValueFactory<TmpImportBooks, String>("bookName"));
+        ageClmn.setCellValueFactory(new PropertyValueFactory<TmpImportBooks, Integer>("age"));
+        priceClmn.setCellValueFactory(new PropertyValueFactory<TmpImportBooks, String>("price"));
+        restClmn.setCellValueFactory(new PropertyValueFactory<TmpImportBooks, String>("rest"));
+        weightClmn.setCellValueFactory(new PropertyValueFactory<TmpImportBooks, String>("weight"));
+        descriptionClmn.setCellValueFactory(new PropertyValueFactory<TmpImportBooks, String>("description"));
+
+
+        data.add(new TmpImportBooks());
+
+        tblImportBooks.setItems(data);
+
+        tblImportBooks.getSelectionModel().setCellSelectionEnabled(true);
+        tblImportBooks.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
         TableUtils.installCopyPasteHandler(tblImportBooks);
-    }
-    public void onSearch(ActionEvent actionEvent) {
     }
 
     public static void setData(int n){
         for (int i = 1; i < n; i++) {
-
             data.add(new TmpImportBooks());
         }
     }
 
     private void parseExcelFile(File file) {
-
         Map<Integer, Map<String, String>> tableMap = new HashMap<>();
         Map<String, String > mapValue;
         try {
@@ -83,7 +102,6 @@ public class ImportBooksController {
                 if(row != null) {
                     tmp = sheet.getRow(i).getPhysicalNumberOfCells();
                     if(tmp > cols) cols = tmp;
-
                 }
             }
 
@@ -122,19 +140,19 @@ public class ImportBooksController {
             ioe.printStackTrace();
         }
 
-        TmpImportBooks p;
+        TmpImportBooks importBooks;
         for(Map.Entry<Integer, Map<String, String>> map : tableMap.entrySet()){
             int i = 0;
-            p = new TmpImportBooks();
+            importBooks = new TmpImportBooks();
             for(Map.Entry<String, String> mapVal : map.getValue().entrySet()){
                 for(String label : labels){
                     if(label.equals(mapVal.getKey()))
-                        p.createPerson(mapVal.getKey(), mapVal.getValue());
+                        importBooks.createPerson(mapVal.getKey(), mapVal.getValue());
                 }
                 System.out.println(mapVal.getKey());
                 System.out.println(mapVal.getValue());
             }
-            data.add(p.getPerson());
+            data.add(importBooks.getTmpImportBook());
         }
     }
 
@@ -147,9 +165,12 @@ public class ImportBooksController {
     }
 
     public void onImport(ActionEvent actionEvent) {
+        parseExcelFile(new File(txtFieldChooseFile.getText()));
     }
 
     public void onClearData(ActionEvent actionEvent) {
+        data.clear();
+        data.add(new TmpImportBooks());
     }
 
     public void onImportApply(ActionEvent actionEvent) {

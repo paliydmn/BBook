@@ -29,7 +29,6 @@ public class TableUtils {
     public static void installCopyPasteHandler(TableView<?> table) {
         // install copy/paste keyboard handler
         table.setOnKeyPressed(new TableKeyEventHandler());
-
     }
 
     /**
