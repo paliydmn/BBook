@@ -15,23 +15,22 @@ public class TmpImportBooks {
     private StringProperty weight;
     private StringProperty description;
 
-
-
    /* private TmpImportBooks(String fName, String lName, Integer age) {
         this.firstName = new SimpleStringProperty(fName);
         this.lastName = new SimpleStringProperty(lName);
         this.age = new SimpleIntegerProperty(age);
     }*/
 
-   public void createPerson(String label, String data){
+   public void createBook(String label, String data){
 
-        if(label.equals("№"))
+
+        if(label.equals("№") || label.equalsIgnoreCase("id") )
             this.setId((int)Double.parseDouble(data));
-        else if(label.equalsIgnoreCase("назва книги"))
+        else if(label.equalsIgnoreCase("назва книги") || label.equalsIgnoreCase("bookName"))
             this.setBookName(data);
-        else if(label.equalsIgnoreCase("вік"))
+        else if(label.equalsIgnoreCase("вік") || label.equalsIgnoreCase("age"))
             this.setAge(data);
-        else if(label.equalsIgnoreCase("ціна видавн."))
+        else if(label.equalsIgnoreCase("ціна видавн.") || label.equalsIgnoreCase("price"))
             this.setPrice(data);
         else if(label.equalsIgnoreCase("кількість"))
             this.setRest(data);

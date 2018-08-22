@@ -16,14 +16,14 @@
       </Label>
       <TextField fx:id="txtFieldChooseFile" layoutX="15.0" layoutY="48.0" prefHeight="25.0" prefWidth="225.0" promptText="Виберіть файл для імпорту книг" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="48.0" />
       <Button fx:id="btnChooseFile" layoutX="245.0" layoutY="48.0" mnemonicParsing="false" onAction="#onChooseFile" prefHeight="25.0" prefWidth="22.0" text="..." AnchorPane.topAnchor="48.0" />
-      <Label layoutX="15.0" layoutY="83.0" text="Вкажіть заголовки(title) по яким буде відбуватись імпорт в таблицю" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="83.0">
+      <Label layoutX="48.0" layoutY="83.0" prefHeight="20.0" prefWidth="505.0" text="Вказати заголовки(title) по яким буде відбуватись імпорт в таблицю" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="83.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="20.0" layoutY="111.0" prefHeight="276.0" prefWidth="225.0" AnchorPane.bottomAnchor="213.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="111.0">
+      <ScrollPane layoutX="20.0" layoutY="111.0" prefHeight="275.0" prefWidth="234.0" AnchorPane.bottomAnchor="214.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="111.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="227.0">
+          <AnchorPane fx:id="AnchorCustomLabelGroup" disable="true" minHeight="0.0" minWidth="0.0" prefHeight="273.0" prefWidth="227.0">
                <children>
                   <TextField fx:id="txtFieldIdLable" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="95.0" promptText="№" />
                   <Label layoutX="131.0" layoutY="40.0" prefHeight="20.0" prefWidth="55.0" text="№">
@@ -131,5 +131,6 @@
       <Button layoutX="20.0" layoutY="398.0" mnemonicParsing="false" onAction="#onImport" prefHeight="25.0" prefWidth="95.0" text="Імпортувати" AnchorPane.bottomAnchor="177.0" AnchorPane.leftAnchor="20.0" />
       <Button layoutX="130.0" layoutY="398.0" mnemonicParsing="false" onAction="#onClearData" prefHeight="25.0" prefWidth="95.0" text="Очистити" AnchorPane.bottomAnchor="177.0" AnchorPane.leftAnchor="130.0" />
       <Button layoutX="576.0" layoutY="328.0" mnemonicParsing="false" onAction="#onImportApply" prefHeight="25.0" prefWidth="95.0" text="Застосувати" AnchorPane.bottomAnchor="47.0" AnchorPane.rightAnchor="19.0" />
+      <CheckBox fx:id="chBoxUseCustomLabels" layoutX="20.0" layoutY="85.0" mnemonicParsing="false" onAction="#onChecked" prefHeight="17.0" prefWidth="4.0" />
    </children>
 </AnchorPane>
